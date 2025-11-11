@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { siteConfig } from "@/config/site";
 
 export async function POST(request: Request) {
   const { email } = await request.json().catch(() => ({}));
@@ -11,28 +12,58 @@ export async function POST(request: Request) {
   }
 
   const webhookUrl = process.env.NEWSLETTER_WEBHOOK_URL;
+  if (webhookUrl) {
+    const response = await fetch(webhookUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    });
 
-  if (!webhookUrl) {
-    console.info("[newsletter] Missing NEWSLETTER_WEBHOOK_URL. Simulating success.");
-    return NextResponse.json({ success: true, queued: false });
+    if (!response.ok) {
+      const payload = await response.text();
+      console.error("[newsletter] Failed to forward subscription", payload);
+      return NextResponse.json(
+        { error: "Unable to subscribe right now. Please try again soon." },
+        { status: 502 },
+      );
+    }
+
+    return NextResponse.json({ success: true, queued: true });
   }
 
-  const response = await fetch(webhookUrl, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ email }),
-  });
+  const resendKey = process.env.RESEND_API_KEY;
+  const contactInbox = process.env.CONTACT_INBOX ?? siteConfig.contactEmail;
 
-  if (!response.ok) {
-    const payload = await response.text();
-    console.error("[newsletter] Failed to forward subscription", payload);
-    return NextResponse.json(
-      { error: "Unable to subscribe right now. Please try again soon." },
-      { status: 502 },
-    );
+  if (resendKey) {
+    const response = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${resendKey}`,
+      },
+      body: JSON.stringify({
+        from: `Empoweress Newsletter <${contactInbox}>`,
+        to: contactInbox,
+        subject: "New newsletter subscriber",
+        html: `<p>${email} just subscribed to Empoweress Dispatch.</p>`,
+      }),
+    });
+
+    if (!response.ok) {
+      const payload = await response.text();
+      console.error("[newsletter] Failed to email subscription", payload);
+      return NextResponse.json(
+        { error: "Unable to subscribe right now. Please try again soon." },
+        { status: 502 },
+      );
+    }
+
+    return NextResponse.json({ success: true, delivered: true });
   }
 
-  return NextResponse.json({ success: true });
+  console.info("[newsletter] No webhook or email configured. Logging signup locally.");
+  console.info({ email });
+  return NextResponse.json({ success: true, queued: false });
 }
