@@ -19,11 +19,11 @@ type BlogPageProps = {
   searchParams: Record<string, string | string[] | undefined>;
 };
 
-const sorters = {
-  newest: (a: Date, b: Date) => Number(b) - Number(a),
-  oldest: (a: Date, b: Date) => Number(a) - Number(b),
-  popular: (a: number, b: number) => b - a,
-};
+const sortByNewest = (a: { date: string }, b: { date: string }) =>
+  new Date(b.date).getTime() - new Date(a.date).getTime();
+
+const sortByOldest = (a: { date: string }, b: { date: string }) =>
+  new Date(a.date).getTime() - new Date(b.date).getTime();
 
 const PAGE_SIZE = 9;
 
@@ -94,10 +94,12 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
           (post.priority ?? 0) * 2 +
           (post.featured ? 5 : 0) +
           (post.pinned ? 3 : 0);
-        return sorters.popular(score(a), score(b));
+        return score(b) - score(a);
       }
-      const sorter = sorters[sortParam as keyof typeof sorters] ?? sorters.newest;
-      return sorter(new Date(a.date), new Date(b.date));
+      if (sortParam === "oldest") {
+        return sortByOldest(a, b);
+      }
+      return sortByNewest(a, b);
     });
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
