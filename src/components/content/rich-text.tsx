@@ -10,6 +10,7 @@ import Link from "next/link";
 import type { Components } from "react-markdown";
 import type { DetailedHTMLProps, HTMLAttributes, ReactElement } from "react";
 import type { Options as RemarkFootnotesOptions } from "remark-footnotes";
+import type { Pluggable } from "unified";
 import { InfoBox } from "./info-box";
 import { PullQuote } from "./pull-quote";
 import { LegalCaseBox } from "./legal-case-box";
@@ -159,9 +160,9 @@ type RichTextProps = {
   content: string;
 };
 
-const footnotesPlugin: [typeof remarkFootnotes, RemarkFootnotesOptions] = [
-  remarkFootnotes,
-  { inlineNotes: true },
+const footnotesPlugin: Pluggable = [
+  remarkFootnotes as any,
+  { inlineNotes: true } satisfies RemarkFootnotesOptions,
 ];
 
 export function RichText({ content }: RichTextProps) {
