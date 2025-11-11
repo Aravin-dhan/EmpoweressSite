@@ -84,9 +84,43 @@ public/             # Static assets (logo, favicon)
 
 ## Next Steps
 
-- Hook the contact/newsletter forms to your provider (Resend, ConvertKit, etc.).
+- Hook the contact form to Resend and the newsletter to Google Sheets (see Form Integrations below).
 - Set `NEXT_PUBLIC_SITE_URL=https://empoweress.site` for share buttons if you fork the project.
 - Add more MDX posts or import from an external CMS.
 - Swap Plausible for another analytics stack if desired.
+
+## Form Integrations
+
+### Contact form (Resend)
+1. Create a free account at [Resend](https://resend.com) and verify your sending domain (e.g., `empoweress.site`).
+2. Generate an API key and add these env vars in Vercel (or `.env.local`):
+   ```
+   RESEND_API_KEY=your_resend_key
+   CONTACT_INBOX=hello@empoweress.site
+   ```
+3. Deploy—every submission from `/contact` is emailed to `CONTACT_INBOX`. If the key is missing, messages stay in server logs.
+
+### Newsletter capture (Google Sheets)
+1. Open the target sheet (for example [this one](https://docs.google.com/spreadsheets/d/11Kopqq3iSBLAAb1X_pdDw9fFw1lhb9WawnmFpShb1Kc/edit?usp=sharing)).
+2. In the sheet, choose **Extensions → Apps Script** and paste:
+   ```js
+   const SHEET_ID = "11Kopqq3iSBLAAb1X_pdDw9fFw1lhb9WawnmFpShb1Kc";
+   const SHEET_NAME = "Sheet1"; // change if your tab name differs
+
+   function doPost(e) {
+     const body = JSON.parse(e.postData.contents);
+     const sheet = SpreadsheetApp.openById(SHEET_ID).getSheetByName(SHEET_NAME);
+     sheet.appendRow([new Date(), body.email]);
+     return ContentService.createTextOutput(
+       JSON.stringify({ success: true }),
+     ).setMimeType(ContentService.MimeType.JSON);
+   }
+   ```
+3. Deploy the script as a web app (access: “Anyone”) and copy the URL.
+4. Add it as an env var:
+   ```
+   GOOGLE_SHEETS_WEBHOOK_URL=https://script.google.com/macros/s/....../exec
+   ```
+5. Redeploy. Newsletter signups now append rows to the sheet. If the webhook is absent, the fallback emails each signup to `CONTACT_INBOX` via Resend so nothing is lost.
 
 Feel free to iterate on the design system, extend categories, or integrate a CMS/admin UI as your editorial workflow grows.

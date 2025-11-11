@@ -11,14 +11,16 @@ export async function POST(request: Request) {
     );
   }
 
-  const webhookUrl = process.env.NEWSLETTER_WEBHOOK_URL;
-  if (webhookUrl) {
-    const response = await fetch(webhookUrl, {
+  const googleWebhook = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
+  const genericWebhook = process.env.NEWSLETTER_WEBHOOK_URL;
+
+  const forwardToWebhook = async (target: string, payload: Record<string, string>) => {
+    const response = await fetch(target, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email }),
+      body: JSON.stringify(payload),
     });
 
     if (!response.ok) {
@@ -30,6 +32,18 @@ export async function POST(request: Request) {
       );
     }
 
+    return null;
+  };
+
+  if (googleWebhook) {
+    const errorResponse = await forwardToWebhook(googleWebhook, { email });
+    if (errorResponse) return errorResponse;
+    return NextResponse.json({ success: true, queued: true, destination: "google-sheets" });
+  }
+
+  if (genericWebhook) {
+    const errorResponse = await forwardToWebhook(genericWebhook, { email });
+    if (errorResponse) return errorResponse;
     return NextResponse.json({ success: true, queued: true });
   }
 

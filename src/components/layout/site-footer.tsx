@@ -10,7 +10,7 @@ const legalLinks = [
 export function SiteFooter() {
   return (
     <footer className="mt-20 border-t border-[var(--color-border)] bg-surface-muted/30 print:hidden">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 md:grid-cols-3">
+      <div className="mx-auto grid w-full max-w-7xl gap-10 px-4 py-12 md:grid-cols-3">
         <div className="space-y-3">
           <p className="font-serif text-2xl font-semibold text-brand-primary">
             Empoweress
@@ -60,6 +60,11 @@ export function SiteFooter() {
             Connect
           </p>
           <p className="text-[var(--color-muted)]">{siteConfig.contactEmail}</p>
+          <p>
+            <Link href="/contact" className="font-semibold text-brand-primary hover:underline">
+              Collaborate with us →
+            </Link>
+          </p>
           <div className="flex gap-3">
             {Object.entries(siteConfig.social).map(([key, href]) => (
               <Link

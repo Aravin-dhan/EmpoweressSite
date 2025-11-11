@@ -47,18 +47,20 @@ export default async function ResourcesPage() {
           Archive by Month
         </p>
         <div className="mt-4 grid gap-6 md:grid-cols-2">
-          {archives.map((group) => (
-            <div key={group.key} className="space-y-2 rounded-2xl border border-[var(--color-border)] p-4">
-              <p className="text-sm font-semibold text-[var(--color-foreground)]">{group.label}</p>
-              <ul className="space-y-1 text-sm text-[var(--color-muted)]">
-                {group.posts.map((post) => (
-                  <li key={post.slug} className="flex items-center justify-between">
-                    <span>{post.title}</span>
-                    <span>{post.readingTime.text}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          {archives
+            .filter((group) => group.posts.length > 0)
+            .map((group) => (
+              <div key={group.key} className="space-y-2 rounded-2xl border border-[var(--color-border)] p-4">
+                <p className="text-sm font-semibold text-[var(--color-foreground)]">{group.label}</p>
+                <ul className="space-y-1 text-sm text-[var(--color-muted)]">
+                  {group.posts.map((post) => (
+                    <li key={post.slug} className="flex items-center justify-between">
+                      <span>{post.title}</span>
+                      <span>{post.readingTime.text}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
           ))}
         </div>
       </section>

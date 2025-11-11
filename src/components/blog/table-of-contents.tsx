@@ -37,7 +37,7 @@ export function TableOfContents({ headings }: TocProps) {
   if (headings.length === 0) return null;
 
   return (
-    <nav className="sticky top-28 hidden max-h-[70vh] flex-col gap-2 rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-6 text-sm shadow-subtle xl:flex">
+    <nav className="sticky top-28 hidden max-h-[70vh] flex-col gap-2 rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-6 text-sm shadow-subtle lg:flex">
       <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-secondary">
         On this page
       </p>

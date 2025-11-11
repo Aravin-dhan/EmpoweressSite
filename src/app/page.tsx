@@ -1,10 +1,5 @@
 import Link from "next/link";
-import {
-  getFeaturedPosts,
-  getRecentPosts,
-  getSearchIndex,
-  getTrendingPosts,
-} from "@/lib/mdx";
+import { getFeaturedPosts, getRecentPosts, getSearchIndex } from "@/lib/mdx";
 import { getCategorySummaries } from "@/lib/categories";
 import { FeaturedPostCard } from "@/components/blog/featured-post-card";
 import { PostCard } from "@/components/blog/post-card";
@@ -12,21 +7,19 @@ import { NewsletterSignup } from "@/components/newsletter/newsletter-card";
 import { SearchBar } from "@/components/search/search-bar";
 import { Button } from "@/components/ui/button";
 import { CategoryTag } from "@/components/blog/category-tag";
-import { TrendingList } from "@/components/blog/trending-list";
 import { categories } from "@/data/categories";
 
 export default async function HomePage() {
-  const [featured, recent, searchIndex, categorySummaries, trending] = await Promise.all([
+  const [featured, recent, searchIndex, categorySummaries] = await Promise.all([
     getFeaturedPosts(),
     getRecentPosts(6),
     getSearchIndex(),
     getCategorySummaries(),
-    getTrendingPosts(),
   ]);
 
   return (
     <div className="space-y-12">
-      <section className="relative overflow-hidden rounded-3xl border border-[var(--color-border)] bg-gradient-to-br from-brand-primary via-[#2d0a4b] to-[#0b0419] p-10 text-white shadow-glow">
+      <section className="relative overflow-visible rounded-3xl border border-[var(--color-border)] bg-gradient-to-br from-brand-primary via-[#2d0a4b] to-[#0b0419] p-10 text-white shadow-glow">
         <div className="pointer-events-none absolute inset-0 bg-[var(--gradient-hero)] opacity-80" />
         <div className="relative space-y-6">
           <div className="max-w-3xl space-y-5">
@@ -54,7 +47,7 @@ export default async function HomePage() {
             </div>
           </div>
           <div className="relative mt-4 max-w-2xl">
-            <SearchBar items={searchIndex} />
+            <SearchBar items={searchIndex} variant="inverted" />
           </div>
         </div>
       </section>
@@ -81,59 +74,20 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {trending.length > 0 && (
-        <section className="space-y-5">
-          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-            <div>
-              <p className="text-xs uppercase tracking-[0.4em] text-brand-secondary">
-                Trending
-              </p>
-              <h2 className="font-serif text-3xl">Most cited arguments this week</h2>
-            </div>
-            <Link
-              href="/blog?sort=popular"
-              className="text-sm font-semibold text-brand-primary hover:underline"
-            >
-              View popularity index →
-            </Link>
-          </div>
-          <TrendingList posts={trending} />
-        </section>
-      )}
-
-      <section className="space-y-5">
+      <section className="rounded-3xl border border-brand-primary/20 bg-gradient-to-br from-brand-primary/5 via-transparent to-brand-secondary/10 p-8 shadow-subtle">
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <div>
             <p className="text-xs uppercase tracking-[0.4em] text-brand-secondary">
-              Categories
+              Submissions
             </p>
-            <h2 className="font-serif text-3xl">Research Streams</h2>
+            <h2 className="font-serif text-3xl">Pitch Empoweress</h2>
+            <p className="text-sm text-[var(--color-muted)]">
+              Send us your feminist legal analysis, case notes, and toolkits. We review pitches weekly.
+            </p>
           </div>
-          <Link
-            href="/blog?q="
-            className="text-sm font-semibold text-brand-primary hover:underline"
-          >
-            Browse all →
-          </Link>
-        </div>
-        <div className="grid gap-4 md:grid-cols-3">
-          {categorySummaries.slice(0, 3).map((category) => (
-            <Link
-              key={category.slug}
-              href={`/blog?category=${category.slug}`}
-              className="rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-6 transition hover:-translate-y-1 hover:shadow-glow"
-            >
-              <p className="text-xs uppercase tracking-[0.3em] text-brand-primary">
-                {category.title}
-              </p>
-              <p className="mt-2 text-lg font-semibold text-[var(--color-foreground)]">
-                {category.description}
-              </p>
-              <p className="mt-4 text-sm text-[var(--color-muted)]">
-                {category.count} published essays
-              </p>
-            </Link>
-          ))}
+          <Button variant="ghost" asChild className="border border-brand-primary/30 px-6 py-2 text-brand-primary hover:bg-brand-primary/10">
+            <Link href="/contact">Submit a pitch →</Link>
+          </Button>
         </div>
       </section>
 

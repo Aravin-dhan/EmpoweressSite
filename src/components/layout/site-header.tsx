@@ -11,7 +11,7 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-3 z-30 px-4 sm:px-6 lg:px-8 print:hidden">
-      <div className="mx-auto flex max-w-6xl items-center justify-between rounded-full border border-[var(--color-border)] bg-[var(--color-card)]/80 px-6 py-4 shadow-subtle backdrop-blur-xl">
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between rounded-full border border-[var(--color-border)] bg-[var(--color-card)]/80 px-6 py-4 shadow-subtle backdrop-blur-xl">
         <Link
           href="/"
           className="font-serif text-2xl font-semibold text-brand-primary"

@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
@@ -20,14 +21,17 @@ type SearchBarProps = {
   items: SearchIndexEntry[];
   placeholder?: string;
   className?: string;
+  variant?: "default" | "inverted";
 };
 
 export function SearchBar({
   items,
   placeholder = "Search articles, tags, and topics",
   className,
+  variant = "default",
 }: SearchBarProps) {
   const [query, setQuery] = useState("");
+  const router = useRouter();
 
   const results = useMemo(() => {
     if (!query.trim()) return [];
@@ -46,8 +50,24 @@ export function SearchBar({
   }, [items, query]);
 
   return (
-    <div className={cn("relative w-full", className)}>
-      <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">
+    <form
+      className={cn("relative w-full", className)}
+      onSubmit={(event) => {
+        event.preventDefault();
+        const trimmed = query.trim();
+        if (!trimmed) return;
+        router.push(`/blog?q=${encodeURIComponent(trimmed)}`);
+        setQuery("");
+      }}
+    >
+      <span
+        className={cn(
+          "pointer-events-none absolute left-4 top-1/2 -translate-y-1/2",
+          variant === "inverted"
+            ? "text-white/70"
+            : "text-[var(--color-muted)]",
+        )}
+      >
         <MagnifyingGlassIcon className="h-5 w-5" aria-hidden="true" />
       </span>
       <Input
@@ -55,12 +75,30 @@ export function SearchBar({
         placeholder={placeholder}
         value={query}
         onChange={(event) => setQuery(event.target.value)}
-        className="pl-12"
+        className={cn(
+          "pl-12",
+          variant === "inverted" &&
+            "border-white/40 text-white placeholder:text-white/70 focus-visible:ring-white focus-visible:ring-offset-[var(--color-card)]",
+        )}
       />
       {query && (
-        <div className="absolute inset-x-0 top-[calc(100%+0.5rem)] z-20 rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] p-4 shadow-glow">
+        <div
+          className={cn(
+            "absolute inset-x-0 top-[calc(100%+0.5rem)] z-20 rounded-2xl border p-4 shadow-glow",
+            variant === "inverted"
+              ? "border-white/30 bg-[#0b0419e6] text-white"
+              : "border-[var(--color-border)] bg-[var(--color-card)]",
+          )}
+        >
           {results.length === 0 ? (
-            <p className="text-sm text-[var(--color-muted)]">
+            <p
+              className={cn(
+                "text-sm",
+                variant === "inverted"
+                  ? "text-white/70"
+                  : "text-[var(--color-muted)]",
+              )}
+            >
               No matches yet. Try another keyword.
             </p>
           ) : (
@@ -69,15 +107,34 @@ export function SearchBar({
                 <li key={result.slug}>
                   <Link
                     href={`/blog/${result.slug}`}
-                    className="block rounded-xl p-3 hover:bg-brand-primary/5"
+                    className={cn(
+                      "block rounded-xl p-3",
+                      variant === "inverted"
+                        ? "hover:bg-white/10"
+                        : "hover:bg-brand-primary/5",
+                    )}
                   >
                     <p className="text-sm uppercase tracking-wide text-brand-primary">
                       {result.category}
                     </p>
-                    <p className="font-semibold text-[var(--color-foreground)]">
+                    <p
+                      className={cn(
+                        "font-semibold",
+                        variant === "inverted"
+                          ? "text-white"
+                          : "text-[var(--color-foreground)]",
+                      )}
+                    >
                       {result.title}
                     </p>
-                    <p className="text-sm text-[var(--color-muted)]">
+                    <p
+                      className={cn(
+                        "text-sm",
+                        variant === "inverted"
+                          ? "text-white/70"
+                          : "text-[var(--color-muted)]",
+                      )}
+                    >
                       {result.readingTime}
                     </p>
                   </Link>
@@ -87,6 +144,6 @@ export function SearchBar({
           )}
         </div>
       )}
-    </div>
+    </form>
   );
 }

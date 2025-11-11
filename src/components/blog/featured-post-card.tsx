@@ -15,8 +15,8 @@ export function FeaturedPostCard({ post }: FeaturedPostCardProps) {
   const postUrl = `${baseUrl}/blog/${post.slug}`;
 
   return (
-    <article className="grid gap-8 rounded-3xl border border-[var(--color-border)] bg-gradient-to-br from-surface-muted to-surface-base p-8 shadow-glow lg:grid-cols-2">
-      <div className="relative overflow-hidden rounded-3xl pb-[70%] lg:pb-0 lg:min-h-[320px]">
+    <article className="grid gap-6 rounded-3xl border border-[var(--color-border)] bg-gradient-to-br from-surface-muted to-surface-base p-4 shadow-subtle md:grid-cols-[minmax(240px,320px)_1fr]">
+      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl md:aspect-[5/4] lg:h-full">
         <Image
           src={post.featuredImage}
           alt={post.title}
@@ -26,25 +26,25 @@ export function FeaturedPostCard({ post }: FeaturedPostCardProps) {
         />
       </div>
 
-      <div className="flex flex-col justify-between gap-6">
-        <div className="space-y-4">
+      <div className="flex flex-col gap-4">
+        <div className="space-y-2.5">
           <CategoryTag label={post.category} />
           <p className="text-xs uppercase tracking-[0.3em] text-brand-secondary">
             Featured Analysis
           </p>
           <Link href={`/blog/${post.slug}`}>
-            <h3 className="font-serif text-3xl font-semibold text-[var(--color-foreground)] hover:text-brand-primary">
+            <h3 className="font-serif text-xl font-semibold text-[var(--color-foreground)] hover:text-brand-primary">
               {post.title}
             </h3>
           </Link>
-          <p className="text-lg text-[var(--color-muted)]">{post.excerpt}</p>
+          <p className="text-sm text-[var(--color-muted)]">{post.excerpt}</p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-6 text-sm text-[var(--color-muted)]">
+        <div className="flex flex-wrap items-center gap-4 text-xs uppercase tracking-wide text-[var(--color-muted)]">
           <span>{formatDate(post.date)}</span>
           <span>{post.readingTime.text}</span>
-          <div className="inline-flex items-center gap-2">
-            <div className="h-10 w-10 overflow-hidden rounded-full bg-brand-primary/10" />
+          <div className="inline-flex items-center gap-2 text-sm normal-case">
+            <div className="h-9 w-9 overflow-hidden rounded-full bg-brand-primary/10" />
             <div>
               <p className="font-semibold text-[var(--color-foreground)]">
                 {post.author.name}

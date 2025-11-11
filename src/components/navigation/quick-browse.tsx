@@ -13,7 +13,7 @@ export function QuickBrowseBar() {
 
   return (
     <nav className="mt-2 border-b border-[var(--color-border)] bg-[var(--color-surface)] px-4 pb-4 pt-5 shadow-sm sm:px-6 lg:px-8 lg:hidden">
-      <div className="mx-auto flex max-w-6xl gap-3 overflow-x-auto">
+      <div className="mx-auto flex w-full max-w-7xl gap-3 overflow-x-auto">
         {items.map((item) => {
           const active =
             pathname === item.href || pathname.startsWith(`${item.href}/`);

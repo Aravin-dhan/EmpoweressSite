@@ -22,10 +22,9 @@ export const siteConfig = {
     { label: "Blog", href: "/blog" },
     { label: "About", href: "/about" },
     { label: "Resources", href: "/resources" },
-    { label: "Contact", href: "/contact" },
     { label: "Archive", href: "/archive" },
   ],
-  contactEmail: "hello@empoweress.org",
+  contactEmail: "hello@empoweress.site",
   newsletter: {
     provider: "convertkit",
     description:

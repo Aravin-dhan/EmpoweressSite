@@ -4,7 +4,6 @@ import Link from "next/link";
 import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
 import { getPostBySlug, getRelatedPosts, getRecentPosts } from "@/lib/mdx";
 import { buildArticleMetadata } from "@/lib/metadata";
-import { PostMeta } from "@/components/blog/post-meta";
 import { RichText } from "@/components/content/rich-text";
 import { TableOfContents } from "@/components/blog/table-of-contents";
 import { ShareButtons } from "@/components/blog/share-buttons";
@@ -18,6 +17,7 @@ import { siteConfig } from "@/config/site";
 import { ArticleJsonLd } from "@/components/seo/article-json-ld";
 import { PrintDownload } from "@/components/blog/print-download";
 import { Comments } from "@/components/blog/comments";
+import { formatDate } from "@/lib/utils";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -51,21 +51,25 @@ export default async function BlogPostPage({ params }: PageProps) {
         ]}
       />
 
-      <header className="space-y-6 rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-10 shadow-subtle">
-        <CategoryTag label={post.category} />
+      <header className="space-y-4 rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-8 shadow-subtle">
+        <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.3em] text-[var(--color-muted)]">
+          <CategoryTag label={post.category} />
+          <span className="tracking-normal">
+            {formatDate(post.date)} · {post.readingTime.text}
+          </span>
+          {post.lastUpdated && post.lastUpdated !== post.date && (
+            <span className="tracking-normal">
+              Updated {formatDate(post.lastUpdated)}
+            </span>
+          )}
+        </div>
         <h1 className="font-serif text-4xl font-semibold text-[var(--color-foreground)]">
           {post.title}
         </h1>
         <p className="text-lg text-[var(--color-muted)]">{post.excerpt}</p>
-        <PostMeta
-          date={post.date}
-          lastUpdated={post.lastUpdated}
-          readingTime={post.readingTime}
-          showUpdated
-        />
       </header>
 
-      <div className="grid gap-10 lg:grid-cols-[3fr,1fr]">
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,3fr),minmax(260px,1fr)]">
         <article id="article-body" className="space-y-10">
           <div className="rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-10 shadow-subtle">
             <RichText content={post.content} />
@@ -120,11 +124,16 @@ export default async function BlogPostPage({ params }: PageProps) {
           <Comments />
         </article>
 
-        <aside className="space-y-6">
+        <aside className="hidden lg:flex lg:flex-col lg:gap-6">
           <TableOfContents headings={post.headings} />
-          <NewsletterSignup />
           <RecentPostsWidget posts={latest} />
+          <NewsletterSignup />
         </aside>
+      </div>
+
+      <div className="grid gap-6 lg:hidden">
+        <RecentPostsWidget posts={latest} />
+        <NewsletterSignup />
       </div>
     </div>
   );

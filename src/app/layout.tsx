@@ -10,6 +10,7 @@ import { BackToTopButton } from "@/components/ui/back-to-top";
 import { AnalyticsSnippet } from "@/components/providers/analytics";
 import { SiteJsonLd } from "@/components/seo/site-json-ld";
 import { QuickBrowseBar } from "@/components/navigation/quick-browse";
+import { CookieBanner } from "@/components/ui/cookie-banner";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -61,14 +62,15 @@ export default function RootLayout({
           <div className="flex min-h-screen flex-col">
             <SiteHeader />
             <QuickBrowseBar />
-            <main className="flex-1 px-4 py-12 sm:px-6 lg:px-8">
-              <div className="mx-auto max-w-6xl">{children}</div>
+            <main className="flex-1 px-4 py-10 sm:px-6 lg:px-8">
+              <div className="mx-auto w-full max-w-7xl">{children}</div>
             </main>
             <SiteFooter />
           </div>
           <BackToTopButton />
           <AnalyticsSnippet />
           <SiteJsonLd />
+          <CookieBanner />
         </ThemeProvider>
       </body>
     </html>
