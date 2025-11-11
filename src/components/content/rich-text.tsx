@@ -19,7 +19,7 @@ import { InstagramEmbed } from "./instagram-embed";
 type GenericElementProps = DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>;
 
 type ExtendedComponents = Components &
-  Record<string, (props: GenericElementProps) => ReactElement | null>;
+  Record<string, (props: GenericElementProps | any) => ReactElement | null>;
 
 const markdownComponents: ExtendedComponents = {
   a: ({ href, children, ...props }) => {
