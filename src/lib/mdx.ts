@@ -170,6 +170,11 @@ export const getPostBySlug = cache(
     slug: string,
     options: { includeDrafts?: boolean } = {},
   ): Promise<PostRecord | null> => {
+    if (!slug) {
+      console.error("getPostBySlug called without a slug");
+      return null;
+    }
+
     const realSlug = slug.replace(/\.mdx$/, "");
     const fullPath = path.join(postsDirectory, `${realSlug}.mdx`);
 

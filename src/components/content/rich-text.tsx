@@ -14,6 +14,7 @@ import { InfoBox } from "./info-box";
 import { PullQuote } from "./pull-quote";
 import { LegalCaseBox } from "./legal-case-box";
 import { Citation } from "./citation";
+import { InstagramEmbed } from "./instagram-embed";
 
 type GenericElementProps = DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>;
 
@@ -147,6 +148,10 @@ const markdownComponents: ExtendedComponents = {
         label={attrs["data-label"]}
       />
     );
+  },
+  "instagram-embed": ({ ...props }: GenericElementProps) => {
+    const attrs = props as Record<string, string | undefined>;
+    return <InstagramEmbed url={attrs["data-url"] ?? ""} caption={attrs["data-caption"]} />;
   },
 };
 

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -10,6 +11,7 @@ export function ContactForm() {
     "idle",
   );
   const [error, setError] = useState<string | null>(null);
+  const [consent, setConsent] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -63,7 +65,27 @@ export function ContactForm() {
         required
         disabled={status === "sending"}
       />
-      <Button type="submit" disabled={status === "sending"} className="w-full md:w-auto">
+      <label className="flex items-start gap-2 text-xs text-[var(--color-muted)]">
+        <input
+          type="checkbox"
+          required
+          checked={consent}
+          onChange={(event) => setConsent(event.target.checked)}
+          className="mt-1"
+        />
+        <span>
+          I agree to the{" "}
+          <Link href="/terms" className="text-brand-primary underline">
+            Terms of Service
+          </Link>{" "}
+          and{" "}
+          <Link href="/privacy" className="text-brand-primary underline">
+            Privacy Policy
+          </Link>
+          .
+        </span>
+      </label>
+      <Button type="submit" disabled={status === "sending" || !consent} className="w-full md:w-auto">
         {status === "sending" ? "Sending..." : "Send message"}
       </Button>
       {status === "sent" && (

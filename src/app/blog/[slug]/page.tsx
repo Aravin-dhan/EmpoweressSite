@@ -20,17 +20,19 @@ import { PrintDownload } from "@/components/blog/print-download";
 import { Comments } from "@/components/blog/comments";
 
 type PageProps = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const post = await getPostBySlug(params.slug);
+  const { slug } = await params;
+  const post = await getPostBySlug(slug);
   if (!post) return {};
   return buildArticleMetadata(post);
 }
 
 export default async function BlogPostPage({ params }: PageProps) {
-  const post = await getPostBySlug(params.slug);
+  const { slug } = await params;
+  const post = await getPostBySlug(slug);
   if (!post) return notFound();
   const related = await getRelatedPosts(post.slug, post.tags, 2);
   const latest = (await getRecentPosts(4)).filter(

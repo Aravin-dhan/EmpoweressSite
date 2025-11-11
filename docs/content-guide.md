@@ -35,6 +35,17 @@ author:
 
 Optional fields include `lastUpdated`, `resources`, `priority`, `featured`, `pinned`, and `seo`.
 
+## Writing Structure
+
+- **Introduction**: 2–3 paragraphs that frame the legal issue and why it matters.
+- **Analysis**: Break doctrine/evidence down by headings. Use components such as `<InfoBox>`, `<PullQuote>`, `<LegalCaseBox>`, `<Citation>`, or `<instagram-embed data-url="" />`.
+- **Actionables**: Close with takeaways, toolkits, or community calls to action.
+
+### Embeds
+
+- Instagram: `<instagram-embed data-url="https://www.instagram.com/p/POST_ID/" data-caption="Optional caption" />`
+- External resources: prepend `http(s)://` so Next.js treats them as absolute URLs.
+
 ## Tagging Tips
 
 - Prefer 2–4 tags per post for better filtering.

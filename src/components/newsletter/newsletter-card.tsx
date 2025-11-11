@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -9,6 +10,7 @@ import { cn } from "@/lib/utils";
 export function NewsletterSignup({ className }: { className?: string }) {
   const [status, setStatus] = useState<"idle" | "success" | "error" | "loading">("idle");
   const [message, setMessage] = useState<string | null>(null);
+  const [consent, setConsent] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -70,7 +72,27 @@ export function NewsletterSignup({ className }: { className?: string }) {
           autoComplete="email"
           disabled={status === "loading"}
         />
-        <Button type="submit" className="w-full md:w-auto" disabled={status === "loading"}>
+        <label className="flex items-start gap-2 text-xs text-[var(--color-muted)]">
+          <input
+            type="checkbox"
+            required
+            checked={consent}
+            onChange={(event) => setConsent(event.target.checked)}
+            className="mt-1"
+          />
+          <span>
+            I agree to the{" "}
+            <Link href="/terms" className="text-brand-primary underline">
+              Terms
+            </Link>{" "}
+            and{" "}
+            <Link href="/privacy" className="text-brand-primary underline">
+              Privacy Policy
+            </Link>
+            .
+          </span>
+        </label>
+        <Button type="submit" className="w-full md:w-auto" disabled={status === "loading" || !consent}>
           {status === "loading" ? "Adding you..." : "Subscribe"}
         </Button>
         <p className="text-xs text-[var(--color-muted)]">
