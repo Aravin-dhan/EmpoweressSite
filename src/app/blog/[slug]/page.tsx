@@ -124,14 +124,17 @@ export default async function BlogPostPage({ params }: PageProps) {
           <Comments />
         </article>
 
-        <aside className="hidden lg:flex lg:flex-col lg:gap-6">
+        <aside className="hidden lg:block">
           <TableOfContents headings={post.headings} />
-          <RecentPostsWidget posts={latest} />
-          <NewsletterSignup />
         </aside>
       </div>
 
       <div className="grid gap-6 lg:hidden">
+        <RecentPostsWidget posts={latest} />
+        <NewsletterSignup />
+      </div>
+
+      <div className="hidden lg:grid gap-6">
         <RecentPostsWidget posts={latest} />
         <NewsletterSignup />
       </div>

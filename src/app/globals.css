@@ -71,11 +71,11 @@
   }
 
   .prose {
-    @apply prose-lg text-[var(--color-foreground)] max-w-none;
+    @apply prose-lg text-[var(--color-foreground)];
   }
 
   .prose p {
-    @apply leading-relaxed text-[var(--color-foreground)];
+    @apply leading-8 text-[var(--color-foreground)];
   }
 
   .prose h2,
@@ -90,6 +90,15 @@
 
   .prose blockquote {
     @apply border-l-4 border-brand-secondary/60 bg-brand-secondary/5 py-2 pl-6 italic text-lg;
+  }
+
+  .prose ul,
+  .prose ol {
+    @apply my-6 leading-8;
+  }
+
+  .prose img {
+    @apply my-8 rounded-2xl;
   }
 
   .prose code {

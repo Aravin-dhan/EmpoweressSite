@@ -167,7 +167,7 @@ const footnotesPlugin: Pluggable = [
 
 export function RichText({ content }: RichTextProps) {
   return (
-    <div className="prose prose-lg prose-slate max-w-none dark:prose-invert">
+    <div className="prose prose-lg prose-slate max-w-[72ch] mx-auto dark:prose-invert">
       <ReactMarkdown
         remarkPlugins={[remarkGfm, footnotesPlugin]}
         rehypePlugins={[
