@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "new:post": "tsx scripts/new-post.ts"
+    "new:post": "tsx scripts/new-post.ts",
+    "images:suggest": "tsx scripts/fetch-image-suggestions.ts",
+    "apply:image": "tsx scripts/apply-image.ts"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",

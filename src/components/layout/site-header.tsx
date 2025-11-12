@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { siteConfig } from "@/config/site";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
@@ -12,11 +13,17 @@ export function SiteHeader() {
   return (
     <header className="sticky top-3 z-30 px-4 sm:px-6 lg:px-8 print:hidden">
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between rounded-full border border-[var(--color-border)] bg-[var(--color-card)]/80 px-6 py-4 shadow-subtle backdrop-blur-xl">
-        <Link
-          href="/"
-          className="font-serif text-2xl font-semibold text-brand-primary"
-        >
-          Empoweress
+        <Link href="/" className="inline-flex items-center gap-3">
+          <Image
+            src="/logo.svg"
+            alt="Empoweress"
+            width={32}
+            height={32}
+            priority
+          />
+          <span className="font-serif text-2xl font-semibold text-brand-primary hidden sm:inline">
+            Empoweress
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-6 text-sm font-medium text-[var(--color-muted)] lg:flex">

@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+ 
+# generated image suggestions and manifests
+public/images/_suggestions/
+content/image-sources.json
+
+# Windows ADS artifacts from WSL copies
+*:*:Zone.Identifier

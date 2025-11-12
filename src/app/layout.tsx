@@ -23,6 +23,12 @@ export const metadata: Metadata = {
   applicationName: siteConfig.name,
   creator: "Empoweress Editorial",
   authors: [{ name: "Empoweress Editorial" }],
+  icons: {
+    icon: [
+      { url: "/logo.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico" },
+    ],
+  },
   openGraph: {
     type: "website",
     locale: siteConfig.locale,
