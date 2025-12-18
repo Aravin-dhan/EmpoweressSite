@@ -1,0 +1,62 @@
+import Image from "next/image";
+import Link from "next/link";
+import type { PostSummary } from "@/types/content";
+import { CategoryTag } from "./category-tag";
+import { formatDate } from "@/lib/utils";
+import { ShareInlineButton } from "./share-inline-button";
+import { siteConfig } from "@/config/site";
+
+type FeaturedPostCardProps = {
+  post: PostSummary;
+};
+
+export function FeaturedPostCard({ post }: FeaturedPostCardProps) {
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? siteConfig.url;
+  const postUrl = `${baseUrl}/blog/${post.slug}`;
+
+  return (
+    <article className="grid gap-6 rounded-3xl border border-[var(--color-border)] bg-gradient-to-br from-surface-muted to-surface-base p-4 shadow-subtle md:grid-cols-[minmax(240px,320px)_1fr]">
+      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl md:aspect-[5/4] lg:h-full">
+        <Image
+          src={post.featuredImage}
+          alt={post.title}
+          fill
+          className="h-full w-full object-cover transition duration-700 hover:scale-105"
+          sizes="(max-width: 1024px) 100vw, 50vw"
+        />
+      </div>
+
+      <div className="flex flex-col gap-4">
+        <div className="space-y-2.5">
+          <CategoryTag label={post.category} />
+          <p className="text-xs uppercase tracking-[0.3em] text-brand-secondary">
+            Featured Analysis
+          </p>
+          <Link href={`/blog/${post.slug}`}>
+            <h3 className="font-serif text-xl font-semibold text-[var(--color-foreground)] hover:text-brand-primary">
+              {post.title}
+            </h3>
+          </Link>
+          <p className="text-sm text-[var(--color-muted)]">{post.excerpt}</p>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-4 text-xs uppercase tracking-wide text-[var(--color-muted)]">
+          <span>{formatDate(post.date)}</span>
+          <span>{post.readingTime.text}</span>
+          <div className="inline-flex items-center gap-2 text-sm normal-case">
+            <div className="h-9 w-9 overflow-hidden rounded-full bg-brand-primary/10" />
+            <div>
+              <p className="font-semibold text-[var(--color-foreground)]">
+                {post.author.name}
+              </p>
+              <p className="text-xs text-[var(--color-muted)]">
+                {post.author.title}
+              </p>
+            </div>
+          </div>
+          <ShareInlineButton title={post.title} url={postUrl} className="ml-auto" />
+        </div>
+      </div>
+    </article>
+  );
+}
