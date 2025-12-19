@@ -37,20 +37,18 @@ export function TableOfContents({ headings }: TocProps) {
   if (headings.length === 0) return null;
 
   return (
-    <nav className="sticky top-28 hidden max-h-[70vh] flex-col gap-2 rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-6 text-sm shadow-subtle lg:flex">
-      <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-secondary">
-        On this page
-      </p>
-      <ul className="mt-4 space-y-2">
+    <nav className="flex flex-col gap-2 text-sm">
+      <ul className="space-y-1">
         {headings.map((heading) => (
           <li key={heading.id}>
             <Link
               href={`#${heading.id}`}
               className={cn(
-                "block rounded-xl px-3 py-2 text-[var(--color-muted)] transition",
+                "block rounded-md px-2 py-1.5 transition hover:text-brand-primary",
                 heading.level === 3 && "ml-4 text-xs",
-                active === heading.id &&
-                  "bg-brand-primary/10 font-semibold text-brand-primary",
+                active === heading.id 
+                  ? "font-semibold text-brand-primary bg-brand-primary/5" 
+                  : "text-[var(--color-muted)]"
               )}
             >
               {heading.title}

@@ -76,6 +76,19 @@ const config: Config = {
           to: { opacity: "1", transform: "translateY(0)" },
         },
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            "h2, h3, h4": {
+              "text-decoration": "none",
+            },
+            h2: {
+              marginTop: "1.5em",
+              marginBottom: "0.5em",
+            },
+          },
+        },
+      },
     },
   },
   plugins: [typography, forms, aspectRatio],

@@ -3,39 +3,39 @@
 @tailwind utilities;
 
 :root {
-  --brand-primary: 91 33 182;
-  --brand-secondary: 236 72 153;
+  --brand-primary: 109 40 217;
+  --brand-secondary: 219 39 119;
   --brand-accent: 251 191 36;
-  --brand-plum: 124 58 237;
+  --brand-plum: 139 92 246;
   --color-background: #fdf8ff;
   --color-surface: #ffffff;
-  --color-card: #f5ecff;
-  --color-foreground: #1b1033;
-  --color-muted: #5f4c76;
-  --color-border: rgba(91, 33, 182, 0.12);
-  --color-icon: #432362;
-  --color-tag-bg: rgba(91, 33, 182, 0.14);
-  --color-tag-border: rgba(91, 33, 182, 0.4);
-  --color-tag-text: #432362;
-  --gradient-hero: radial-gradient(circle at 20% 20%, rgba(123, 58, 237, 0.35), transparent 55%);
+  --color-card: #f8f5fc;
+  --color-foreground: #1e1b4b;
+  --color-muted: #6b7280;
+  --color-border: rgba(109, 40, 217, 0.15);
+  --color-icon: #5b21b6;
+  --color-tag-bg: rgba(109, 40, 217, 0.1);
+  --color-tag-border: rgba(109, 40, 217, 0.3);
+  --color-tag-text: #5b21b6;
+  --gradient-hero: radial-gradient(circle at 20% 20%, rgba(139, 92, 246, 0.25), transparent 55%);
 }
 
 .dark {
-  --brand-primary: 196 169 255;
-  --brand-secondary: 251 111 187;
+  --brand-primary: 167 139 250;
+  --brand-secondary: 244 114 182;
   --brand-accent: 255 216 111;
-  --brand-plum: 214 179 255;
-  --color-background: #090512;
-  --color-surface: #120a23;
-  --color-card: #19102c;
-  --color-foreground: #f7ecff;
-  --color-muted: #cdb8de;
-  --color-border: rgba(233, 213, 255, 0.15);
-  --color-icon: #f1d8ff;
-  --color-tag-bg: rgba(196, 169, 255, 0.18);
-  --color-tag-border: rgba(241, 216, 255, 0.55);
-  --color-tag-text: #f1d8ff;
-  --gradient-hero: radial-gradient(circle at 20% 20%, rgba(196, 169, 255, 0.2), transparent 55%);
+  --brand-plum: 196 181 253;
+  --color-background: #0f0720;
+  --color-surface: #17102e;
+  --color-card: #1e1538;
+  --color-foreground: #f3f4f6;
+  --color-muted: #9ca3af;
+  --color-border: rgba(167, 139, 250, 0.15);
+  --color-icon: #e9d5ff;
+  --color-tag-bg: rgba(167, 139, 250, 0.15);
+  --color-tag-border: rgba(167, 139, 250, 0.4);
+  --color-tag-text: #e9d5ff;
+  --gradient-hero: radial-gradient(circle at 20% 20%, rgba(167, 139, 250, 0.15), transparent 55%);
 }
 
 @layer base {
@@ -45,6 +45,19 @@
 
   body {
     @apply bg-[var(--color-background)] text-[var(--color-foreground)] antialiased font-sans;
+    text-rendering: optimizeLegibility;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 100;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
   }
 
   ::selection {
@@ -57,7 +70,7 @@
   h4,
   h5,
   h6 {
-    @apply font-serif;
+    @apply font-serif tracking-wide;
   }
 
   a {
@@ -71,30 +84,50 @@
   }
 
   .prose {
-    @apply prose-lg text-[var(--color-foreground)];
+    @apply prose-lg text-[var(--color-foreground)] max-w-none;
   }
 
   .prose p {
-    @apply leading-8 text-[var(--color-foreground)];
+    @apply leading-normal text-[var(--color-foreground)] mb-4 text-justify;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 1.125rem;
+    line-height: 1.5;
   }
 
-  .prose h2,
-  .prose h3,
-  .prose h4 {
-    @apply text-[var(--color-foreground)] tracking-tight;
+  /* Aggressive override for headings */
+  .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+    text-decoration: none !important;
+    border-bottom: none !important;
+    font-weight: 600;
+    color: var(--color-foreground);
+    margin-top: 2em;
+    margin-bottom: 0.75em;
   }
 
   .prose a {
-    @apply text-brand-primary underline-offset-4;
+    @apply text-brand-primary underline decoration-2 underline-offset-4 hover:text-brand-secondary transition-colors;
   }
 
   .prose blockquote {
-    @apply border-l-4 border-brand-secondary/60 bg-brand-secondary/5 py-2 pl-6 italic text-lg;
+    @apply relative border-l-0 pl-0 py-6 my-8 text-3xl text-center leading-relaxed text-[var(--color-foreground)] opacity-90;
+    font-family: "Brush Script MT", "cursive";
+  }
+
+  .prose blockquote::before {
+    content: none;
+  }
+
+  .font-calligraphy {
+    font-family: "Brush Script MT", "cursive";
   }
 
   .prose ul,
   .prose ol {
-    @apply my-6 leading-8;
+    @apply my-6 leading-relaxed pl-6;
+  }
+
+  .prose li {
+    @apply my-2 marker:text-brand-primary;
   }
 
   .prose img {

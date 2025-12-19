@@ -1,35 +1,28 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { cn } from "@/lib/utils";
 
-export function ReadingProgress({ target }: { target: string }) {
+export function ReadingProgress() {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const article = document.querySelector<HTMLElement>(target);
-    if (!article) return;
-
-    const handleScroll = () => {
-      const height = Math.max(1, article.scrollHeight - window.innerHeight);
-      const scrolled = window.scrollY - (article.offsetTop ?? 0);
-      const percentage = Math.min(100, Math.max(0, (scrolled / height) * 100));
-      setProgress(Number.isNaN(percentage) ? 0 : percentage);
+    const updateProgress = () => {
+      const currentProgress = window.scrollY;
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (scrollHeight) {
+        setProgress(Number((currentProgress / scrollHeight).toFixed(2)) * 100);
+      }
     };
 
-    handleScroll();
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [target]);
+    window.addEventListener("scroll", updateProgress);
+    return () => window.removeEventListener("scroll", updateProgress);
+  }, []);
 
   return (
-    <div className="reading-progress fixed inset-x-0 top-0 z-40 h-1 bg-transparent print:hidden">
-      <div
-        className={cn(
-          "h-full origin-left bg-gradient-to-r from-brand-primary via-brand-secondary to-brand-accent transition-[width]",
-        )}
-        style={{ width: `${progress}%` }}
-      />
-    </div>
+    <div
+      className="fixed top-0 left-0 h-1 z-50 bg-brand-primary transition-all duration-150 ease-out"
+      style={{ width: `${progress}%` }}
+      aria-hidden="true"
+    />
   );
 }
