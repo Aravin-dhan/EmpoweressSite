@@ -16,9 +16,9 @@ interface PostEditorProps {
         content: string;
         author: {
             name: string;
-            title: string;
-            avatar: string;
-            organization: string;
+            title?: string;
+            avatar?: string;
+            organization?: string;
         }
     };
     isNew?: boolean;
