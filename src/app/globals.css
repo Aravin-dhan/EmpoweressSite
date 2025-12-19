@@ -130,31 +130,30 @@
 }
 
 @media print {
-  body {
-    background: #ffffff !important;
-    color: #111827 !important;
-    font-size: 14pt;
+  body * {
+    visibility: hidden;
+  }
+  
+  #main-article, #main-article * {
+    visibility: visible;
   }
 
-  header,
-  footer,
-  .print-hidden,
-  .reading-progress,
-  .back-to-top {
+  #main-article {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Hide specific elements within the article if needed, e.g., share buttons */
+  .no-print {
     display: none !important;
   }
-
-  main,
-  article,
-  section {
-    box-shadow: none !important;
-    border-color: #e5e7eb !important;
-    background: #ffffff !important;
-  }
-
-  a::after {
-    content: " (" attr(href) ")";
-    font-size: 10pt;
-    color: #4b5563;
+  
+  /* Reset background and colors for print */
+  body {
+    background: white !important;
   }
 }
