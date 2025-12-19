@@ -20,9 +20,6 @@ export const siteConfig = {
   navigation: [
     { label: "Home", href: "/" },
     { label: "Blog", href: "/blog" },
-    { label: "About", href: "/about" },
-    { label: "Resources", href: "/resources" },
-    { label: "Archive", href: "/archive" },
   ],
   contactEmail: "hello@empoweress.site",
   newsletter: {
