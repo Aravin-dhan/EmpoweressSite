@@ -1,8 +1,17 @@
-
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import { 
+    PhotoIcon, 
+    LinkIcon, 
+    ListBulletIcon, 
+    QueueListIcon,
+    CodeBracketIcon, 
+    CommandLineIcon
+} from "@heroicons/react/24/outline";
 
 interface PostEditorProps {
     initialData?: {
@@ -28,6 +37,8 @@ export function PostEditor({ initialData, isNew = false }: PostEditorProps) {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [activeTab, setActiveTab] = useState<"edit" | "preview" | "split">("split");
+    const textareaRef = useRef<HTMLTextAreaElement>(null);
 
     const [formData, setFormData] = useState({
         title: initialData?.title || "",
@@ -48,14 +59,152 @@ export function PostEditor({ initialData, isNew = false }: PostEditorProps) {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
+    // Formatting Logic
+    const insertFormat = (type: string, arg?: string) => {
+        const textarea = textareaRef.current;
+        if (!textarea) return;
 
-// ... inside component ...
+        const start = textarea.selectionStart;
+        const end = textarea.selectionEnd;
+        const text = formData.content;
+        const selection = text.substring(start, end);
+        
+        let before = "";
+        let after = "";
+        let newSelection = selection;
 
-    const [activeTab, setActiveTab] = useState<"edit" | "preview" | "split">("split");
+        switch (type) {
+            case "bold":
+                before = "**";
+                after = "**";
+                break;
+            case "italic":
+                before = "*";
+                after = "*";
+                break;
+            case "strikethrough":
+                before = "~~";
+                after = "~~";
+                break;
+            case "heading":
+                before = "## ";
+                break;
+            case "quote":
+                before = "> ";
+                break;
+            case "list-ul":
+                before = "- ";
+                break;
+            case "list-ol":
+                before = "1. ";
+                break;
+            case "code":
+                before = "`";
+                after = "`";
+                break;
+            case "code-block":
+                before = "```\n";
+                after = "\n```";
+                break;
+            case "link":
+                const url = arg || prompt("Enter URL:");
+                if (!url) return;
+                before = "[";
+                after = `](${url})`;
+                break;
+            case "image":
+                const imgUrl = arg || prompt("Enter Image URL:");
+                if (!imgUrl) return;
+                before = "![";
+                after = `](${imgUrl})`;
+                newSelection = selection || "Alt Text";
+                break;
+        }
 
-    // ... handle submit ...
+        const newText = text.substring(0, start) + before + newSelection + after + text.substring(end);
+        
+        // Update state
+        setFormData(prev => ({ ...prev, content: newText }));
+
+        // Restore focus and selection (async to wait for render)
+        setTimeout(() => {
+            textarea.focus();
+            const newCursorPos = start + before.length + newSelection.length + after.length;
+            // If wrapping, select the inner text
+            if (type === 'bold' || type === 'italic' || type === 'strikethrough' || type === 'code') {
+                 textarea.setSelectionRange(start + before.length, start + before.length + newSelection.length);
+            } else {
+                 textarea.setSelectionRange(newCursorPos, newCursorPos);
+            }
+        }, 0);
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+        if ((e.ctrlKey || e.metaKey)) {
+            switch(e.key.toLowerCase()) {
+                case 'b':
+                    e.preventDefault();
+                    insertFormat('bold');
+                    break;
+                case 'i':
+                    e.preventDefault();
+                    insertFormat('italic');
+                    break;
+                case 'k':
+                    e.preventDefault();
+                    insertFormat('link');
+                    break;
+                case 's': // Strikethrough? Usually Shift+CMD+X or something, but let's override save?
+                    // Let's keep S for save usually, but here we can check shift
+                    if (e.shiftKey) {
+                        e.preventDefault();
+                        insertFormat('strikethrough');
+                    }
+                    break;
+            }
+        }
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setLoading(true);
+        setError(null);
+
+        const password = sessionStorage.getItem("admin_password");
+        if (!password) {
+            setError("Not authenticated");
+            setLoading(false);
+            return;
+        }
+
+        try {
+            const res = await fetch("/api/portal/posts", {
+                method: isNew ? "POST" : "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "x-admin-password": password,
+                },
+                body: JSON.stringify({
+                    ...formData,
+                    tags: formData.tags.split(",").map(t => t.trim()).filter(Boolean),
+                    isNew
+                }),
+            });
+
+            if (!res.ok) {
+                const msg = await res.text();
+                throw new Error(msg || "Failed to save post");
+            }
+
+            router.push("/site-portal");
+            router.refresh();
+        } catch (err: any) {
+            console.error(err);
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     return (
         <form onSubmit={handleSubmit} className="space-y-6 max-w-[1600px] mx-auto h-[calc(100vh-140px)] flex flex-col">
@@ -102,7 +251,7 @@ import remarkGfm from "remark-gfm";
             )}
 
             <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 min-h-0">
-                {/* Meta Sidebar */}
+                {/* Meta Sidebar - Unchanged */}
                 <div className="lg:col-span-3 space-y-6 overflow-y-auto pr-2 custom-scrollbar">
                     <div className="space-y-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] p-5 shadow-sm">
                         <h3 className="text-sm font-semibold uppercase tracking-wider text-[var(--color-muted)] border-b border-[var(--color-border)] pb-2 mb-3">Meta Data</h3>
@@ -160,6 +309,15 @@ import remarkGfm from "remark-gfm";
                                     placeholder="law, justice"
                                 />
                             </div>
+                            <div>
+                                <label className="block text-xs font-medium mb-1">Excerpt</label>
+                                <textarea
+                                    name="excerpt"
+                                    value={formData.excerpt}
+                                    onChange={handleChange}
+                                    className="w-full rounded-md border border-[var(--color-border)] bg-[var(--color-background)] px-3 py-2 text-sm h-20 resize-none"
+                                />
+                            </div>
                         </div>
                     </div>
 
@@ -175,6 +333,15 @@ import remarkGfm from "remark-gfm";
                                     className="w-full rounded-md border border-[var(--color-border)] bg-[var(--color-background)] px-3 py-2 text-sm"
                                 />
                             </div>
+                             <div>
+                                <label className="block text-xs font-medium mb-1">Title</label>
+                                <input
+                                    name="authorTitle"
+                                    value={formData.authorTitle}
+                                    onChange={handleChange}
+                                    className="w-full rounded-md border border-[var(--color-border)] bg-[var(--color-background)] px-3 py-2 text-sm"
+                                />
+                            </div>
                          </div>
                     </div>
                 </div>
@@ -184,13 +351,29 @@ import remarkGfm from "remark-gfm";
                     
                     {/* Editor Pane */}
                     <div className={`flex flex-col h-full ${(activeTab === 'preview') ? 'hidden' : 'block'}`}>
-                        <div className="bg-[var(--color-background)] px-4 py-2 border-b border-[var(--color-border)] flex justify-between items-center">
-                            <span className="text-xs font-semibold text-[var(--color-muted)] uppercase tracking-wider">Markdown Source</span>
+                        {/* Toolbar */}
+                        <div className="bg-[var(--color-background)] px-3 py-2 border-b border-[var(--color-border)] flex flex-wrap items-center gap-1">
+                             <ToolbarBtn onClick={() => insertFormat('bold')} label="Bold (Ctrl+B)" icon={<span className="font-bold text-lg leading-none font-serif">B</span>} />
+                             <ToolbarBtn onClick={() => insertFormat('italic')} label="Italic (Ctrl+I)" icon={<span className="italic text-lg leading-none font-serif">I</span>} />
+                             <ToolbarBtn onClick={() => insertFormat('strikethrough')} label="Strikethrough" icon={<span className="line-through text-lg leading-none font-serif">S</span>} />
+                             <div className="w-px h-5 bg-[var(--color-border)] mx-1" />
+                             <ToolbarBtn onClick={() => insertFormat('heading')} label="Heading" icon={<span className="font-bold text-sm leading-none">H</span>} />
+                             <ToolbarBtn onClick={() => insertFormat('quote')} label="Quote" icon={<span className="font-serif italic text-lg leading-none">“</span>} />
+                             <ToolbarBtn onClick={() => insertFormat('code')} label="Inline Code" icon={<CodeBracketIcon className="w-4 h-4" />} />
+                             <div className="w-px h-5 bg-[var(--color-border)] mx-1" />
+                             <ToolbarBtn onClick={() => insertFormat('list-ul')} label="Bullet List" icon={<ListBulletIcon className="w-4 h-4" />} />
+                             <ToolbarBtn onClick={() => insertFormat('list-ol')} label="Numbered List" icon={<QueueListIcon className="w-4 h-4" />} />
+                             <div className="w-px h-5 bg-[var(--color-border)] mx-1" />
+                             <ToolbarBtn onClick={() => insertFormat('link')} label="Link (Ctrl+K)" icon={<LinkIcon className="w-4 h-4" />} />
+                             <ToolbarBtn onClick={() => insertFormat('image')} label="Image" icon={<PhotoIcon className="w-4 h-4" />} />
                         </div>
+
                         <textarea
+                            ref={textareaRef}
                             name="content"
                             value={formData.content}
                             onChange={handleChange}
+                            onKeyDown={handleKeyDown}
                             className="flex-1 w-full p-4 bg-transparent resize-none focus:outline-none font-mono text-sm leading-relaxed"
                             placeholder="# Write your masterpiece..."
                             required
@@ -199,7 +382,7 @@ import remarkGfm from "remark-gfm";
 
                     {/* Preview Pane */}
                     <div className={`flex flex-col h-full overflow-y-auto bg-[var(--color-background)] custom-scrollbar ${(activeTab === 'edit') ? 'hidden' : 'block'}`}>
-                         <div className="bg-[var(--color-card)] px-4 py-2 border-b border-[var(--color-border)] sticky top-0 z-10">
+                         <div className="bg-[var(--color-card)] px-4 py-2 border-b border-[var(--color-border)] sticky top-0 z-10 flex justify-between items-center h-[45px]">
                             <span className="text-xs font-semibold text-[var(--color-muted)] uppercase tracking-wider">Live Preview</span>
                         </div>
                         <div className="p-8 prose prose-sm max-w-none dark:prose-invert">
@@ -211,5 +394,18 @@ import remarkGfm from "remark-gfm";
                 </div>
             </div>
         </form>
+    );
+}
+
+function ToolbarBtn({ onClick, icon, label }: { onClick: () => void, icon: React.ReactNode, label: string }) {
+    return (
+        <button
+            type="button"
+            onClick={onClick}
+            title={label}
+            className="p-1.5 rounded hover:bg-[var(--color-card)] text-[var(--color-muted)] hover:text-brand-primary transition-colors flex items-center justify-center min-w-[28px] min-h-[28px]"
+        >
+            {icon}
+        </button>
     );
 }

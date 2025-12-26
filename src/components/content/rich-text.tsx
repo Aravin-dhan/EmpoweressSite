@@ -40,7 +40,8 @@ const markdownComponents: ExtendedComponents = {
   h2: ({ children, ...props }) => (
     <h2
       {...props}
-      className="mt-12 scroll-mt-24 font-serif text-3xl font-semibold text-[var(--color-foreground)]"
+      className="mt-8 mb-4 scroll-mt-24 font-serif text-3xl font-semibold text-[var(--color-foreground)] !no-underline border-none"
+      style={{ textDecoration: 'none', borderBottom: 'none' }}
     >
       {children}
     </h2>
@@ -48,20 +49,21 @@ const markdownComponents: ExtendedComponents = {
   h3: ({ children, ...props }) => (
     <h3
       {...props}
-      className="mt-8 scroll-mt-28 font-serif text-2xl font-semibold text-[var(--color-foreground)]"
+      className="mt-6 mb-3 scroll-mt-28 font-serif text-2xl font-semibold text-[var(--color-foreground)] !no-underline border-none"
+      style={{ textDecoration: 'none', borderBottom: 'none' }}
     >
       {children}
     </h3>
   ),
   blockquote: ({ children }) => (
-    <blockquote className="my-6 border-l-4 border-brand-secondary/60 bg-brand-secondary/10 p-4 text-lg italic text-brand-secondary">
+    <blockquote className="my-8 py-4 text-3xl text-center leading-relaxed text-[var(--color-foreground)] opacity-90 font-calligraphy">
       {children}
     </blockquote>
   ),
   ul: ({ children, ...props }) => (
     <ul
       {...props}
-      className="my-6 list-disc space-y-2 pl-6 text-[var(--color-foreground)]"
+      className="my-4 list-disc space-y-2 pl-6 text-[var(--color-foreground)]"
     >
       {children}
     </ul>
@@ -69,13 +71,13 @@ const markdownComponents: ExtendedComponents = {
   ol: ({ children, ...props }) => (
     <ol
       {...props}
-      className="my-6 list-decimal space-y-2 pl-6 text-[var(--color-foreground)]"
+      className="my-4 list-decimal space-y-2 pl-6 text-[var(--color-foreground)]"
     >
       {children}
     </ol>
   ),
   table: ({ children, ...props }) => (
-    <div className="my-6 overflow-x-auto rounded-2xl border border-[var(--color-border)]">
+    <div className="my-6 overflow-x-auto border border-[var(--color-border)]">
       <table
         {...props}
         className="w-full divide-y divide-[var(--color-border)]"
@@ -101,7 +103,7 @@ const markdownComponents: ExtendedComponents = {
     const resolvedSrc = typeof src === "string" ? src : undefined;
     if (!resolvedSrc) return null;
     return (
-      <div className="my-6 overflow-hidden rounded-3xl border border-[var(--color-border)]">
+      <div className="my-8 overflow-hidden border border-[var(--color-border)]">
         <Image
           src={resolvedSrc}
           alt={alt ?? ""}
@@ -176,8 +178,9 @@ export function RichText({ content }: RichTextProps) {
           [
             rehypeAutolinkHeadings,
             {
-              behavior: "wrap",
-              properties: { className: ["anchor-link"] },
+              behavior: "append",
+              properties: { className: ["anchor-link"], ariaHidden: true, tabIndex: -1 },
+              content: { type: 'element', tagName: 'span', properties: { className: ['anchor-icon'] }, children: [{ type: 'text', value: '#' }] }
             },
           ],
           rehypePrism,

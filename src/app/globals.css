@@ -103,6 +103,22 @@
     margin-top: 2em;
     margin-bottom: 0.75em;
   }
+  
+  /* Anchor link styling */
+  .anchor-link {
+    text-decoration: none !important;
+    color: var(--color-border);
+    margin-left: 0.5em;
+    opacity: 0;
+    transition: opacity 0.2s;
+    font-weight: normal;
+  }
+  
+  h2:hover .anchor-link,
+  h3:hover .anchor-link,
+  h4:hover .anchor-link {
+    opacity: 1;
+  }
 
   .prose a {
     @apply text-brand-primary underline decoration-2 underline-offset-4 hover:text-brand-secondary transition-colors;
