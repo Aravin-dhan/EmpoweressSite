@@ -44,7 +44,7 @@ export default async function HomePage() {
                 variant="ghost-white"
                 asChild
               >
-                <Link href="/resources">Download Toolkits</Link>
+                <Link href="/contact">Submit an Article →</Link>
               </Button>
             </div>
           </div>

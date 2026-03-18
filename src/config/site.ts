@@ -13,9 +13,9 @@ export const siteConfig = {
   ],
   locale: "en_IN",
   social: {
-    twitter: "https://twitter.com/empoweress",
-    linkedin: "https://www.linkedin.com/company/empoweress",
-    instagram: "https://www.instagram.com/empoweress",
+    twitter: "",
+    linkedin: "",
+    instagram: "",
   },
   navigation: [
     { label: "Home", href: "/" },

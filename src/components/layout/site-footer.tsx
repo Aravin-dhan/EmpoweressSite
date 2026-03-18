@@ -66,7 +66,7 @@ export function SiteFooter() {
             </Link>
           </p>
           <div className="flex gap-3">
-            {Object.entries(siteConfig.social).map(([key, href]) => (
+            {Object.entries(siteConfig.social).filter(([, href]) => !!href).map(([key, href]) => (
               <Link
                 key={key}
                 href={href}
