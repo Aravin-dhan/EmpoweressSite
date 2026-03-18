@@ -60,7 +60,8 @@ const config: Config = {
       },
       boxShadow: {
         glow: "0 15px 45px 0 rgba(107, 70, 193, 0.25)",
-        subtle: "0 5px 20px rgba(15, 23, 42, 0.08)",
+        subtle: "0 2px 8px rgba(109, 40, 217, 0.06), 0 8px 24px rgba(15, 23, 42, 0.08)",
+        card: "0 1px 2px rgba(0,0,0,0.04), 0 4px 16px rgba(109, 40, 217, 0.11), 0 16px 40px rgba(109, 40, 217, 0.07)",
       },
       animation: {
         "fade-in": "fadeIn 0.4s ease-in-out",

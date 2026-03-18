@@ -14,6 +14,8 @@ const variants = {
     "bg-transparent text-brand-primary hover:bg-brand-primary/10 border border-transparent",
   subtle:
     "bg-surface-muted text-text hover:bg-brand-secondary/10 border border-transparent",
+  "ghost-white":
+    "bg-transparent border border-white/40 text-white hover:bg-white/10",
 };
 
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {

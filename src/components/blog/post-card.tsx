@@ -20,7 +20,7 @@ export function PostCard({
   const postUrl = `${baseUrl}/blog/${post.slug}`;
 
   return (
-    <article className="group flex h-full flex-col rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-subtle transition hover:-translate-y-1 hover:shadow-glow">
+    <article className="group flex h-full flex-col rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-card transition hover:-translate-y-1 hover:shadow-glow">
       <div
         className={`relative overflow-hidden rounded-2xl ${isVertical ? "pb-48" : "pb-56"}`}
       >

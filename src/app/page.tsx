@@ -19,8 +19,11 @@ export default async function HomePage() {
 
   return (
     <div className="space-y-12">
-      <section className="relative overflow-visible rounded-3xl border border-[var(--color-border)] bg-gradient-to-br from-brand-primary via-[#2d0a4b] to-[#0b0419] p-10 text-white shadow-glow">
-        <div className="pointer-events-none absolute inset-0 bg-[var(--gradient-hero)] opacity-80" />
+      <section className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-[#4c1d95] via-[#2d0a4b] to-[#0b0419] p-10 text-white shadow-glow">
+        {/* radial glow top-left */}
+        <div className="pointer-events-none absolute -top-24 -left-24 h-96 w-96 rounded-full bg-violet-600/20 blur-3xl" />
+        {/* subtle sweep bottom-right */}
+        <div className="pointer-events-none absolute -bottom-16 -right-16 h-72 w-72 rounded-full bg-[#9d1d4e]/20 blur-3xl" />
         <div className="relative space-y-6">
           <div className="max-w-3xl space-y-5">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/40 px-4 py-1 text-xs uppercase tracking-[0.4em] text-white">
@@ -38,9 +41,8 @@ export default async function HomePage() {
                 <Link href="/blog">Explore Latest Posts</Link>
               </Button>
               <Button
-                variant="secondary"
+                variant="ghost-white"
                 asChild
-                className="border-white/40 text-white hover:bg-white/10"
               >
                 <Link href="/resources">Download Toolkits</Link>
               </Button>

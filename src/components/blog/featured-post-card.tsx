@@ -15,7 +15,7 @@ export function FeaturedPostCard({ post }: FeaturedPostCardProps) {
   const postUrl = `${baseUrl}/blog/${post.slug}`;
 
   return (
-    <article className="grid gap-6 rounded-3xl border border-[var(--color-border)] bg-gradient-to-br from-surface-muted to-surface-base p-4 shadow-subtle md:grid-cols-[minmax(240px,320px)_1fr]">
+    <article className="grid gap-6 rounded-3xl border border-[var(--color-border)] bg-gradient-to-br from-surface-muted to-surface-base p-4 shadow-card md:grid-cols-[minmax(240px,320px)_1fr]">
       <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl md:aspect-[5/4] lg:h-full">
         <Image
           src={post.featuredImage}
@@ -33,18 +33,20 @@ export function FeaturedPostCard({ post }: FeaturedPostCardProps) {
             Featured Analysis
           </p>
           <Link href={`/blog/${post.slug}`}>
-            <h3 className="font-serif text-xl font-semibold text-[var(--color-foreground)] hover:text-brand-primary">
+            <h3 className="font-serif text-2xl font-semibold leading-snug text-[var(--color-foreground)] hover:text-brand-primary transition-colors">
               {post.title}
             </h3>
           </Link>
-          <p className="text-sm text-[var(--color-muted)]">{post.excerpt}</p>
+          <p className="text-sm leading-relaxed text-[var(--color-muted)]">{post.excerpt}</p>
         </div>
 
         <div className="flex flex-wrap items-center gap-4 text-xs uppercase tracking-wide text-[var(--color-muted)]">
           <span>{formatDate(post.date)}</span>
           <span>{post.readingTime.text}</span>
           <div className="inline-flex items-center gap-2 text-sm normal-case">
-            <div className="h-9 w-9 overflow-hidden rounded-full bg-brand-primary/10" />
+            <div className="h-9 w-9 overflow-hidden rounded-full bg-brand-primary/10 flex items-center justify-center text-xs font-bold text-brand-primary shrink-0">
+                {post.author.name.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase()}
+              </div>
             <div>
               <p className="font-semibold text-[var(--color-foreground)]">
                 {post.author.name}

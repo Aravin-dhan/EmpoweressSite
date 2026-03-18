@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
 import { getPostBySlug, getRelatedPosts, getRecentPosts } from "@/lib/mdx";
 import { buildArticleMetadata } from "@/lib/metadata";
@@ -52,10 +53,11 @@ export default async function BlogPostPage({ params }: PageProps) {
         ]}
       />
 
-      <header className="mb-12">
+      <header className="mb-12 space-y-8">
+        {/* Title & meta row */}
         <div className="grid gap-8 lg:grid-cols-[1.8fr,1fr] lg:items-start border-b border-[var(--color-border)] pb-8">
           <div className="space-y-4">
-             <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.3em] text-[var(--color-muted)]">
+            <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.3em] text-[var(--color-muted)]">
               <CategoryTag label={post.category} />
               <span className="tracking-normal">
                 {formatDate(post.date)} · {post.readingTime.text}
@@ -65,11 +67,41 @@ export default async function BlogPostPage({ params }: PageProps) {
               {post.title}
             </h1>
           </div>
-          <div className="lg:pl-8 lg:pt-2">
+          <div className="lg:pl-8 lg:pt-2 space-y-5">
             <p className="text-xl text-[var(--color-muted)] leading-relaxed italic font-serif">
               {post.excerpt}
             </p>
+            {/* Author strip */}
+            <div className="flex items-center gap-3 pt-2 border-t border-[var(--color-border)]">
+              <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full bg-brand-primary/10">
+                {post.author.avatar ? (
+                  <Image src={post.author.avatar} alt={post.author.name} fill className="object-cover" />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center text-sm font-semibold text-brand-primary">
+                    {post.author.name.charAt(0)}
+                  </div>
+                )}
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-[var(--color-foreground)]">{post.author.name}</p>
+                {post.author.title && (
+                  <p className="text-xs text-[var(--color-muted)]">{post.author.title}</p>
+                )}
+              </div>
+            </div>
           </div>
+        </div>
+
+        {/* Featured image */}
+        <div className="relative w-full overflow-hidden rounded-2xl" style={{ aspectRatio: "16/7" }}>
+          <Image
+            src={post.featuredImage}
+            alt={post.title}
+            fill
+            priority
+            className="object-cover"
+            sizes="(max-width: 1280px) 100vw, 1280px"
+          />
         </div>
       </header>
 

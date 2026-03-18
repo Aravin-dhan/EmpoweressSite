@@ -4,18 +4,20 @@
 
 :root {
   --brand-primary: 109 40 217;
-  --brand-secondary: 219 39 119;
+  --brand-secondary: 157 29 78;
   --brand-accent: 251 191 36;
   --brand-plum: 139 92 246;
-  --color-background: #fdf8ff;
+  /* Page bg: clearly lavender so pure-white cards stand out */
+  --color-background: #ede8f5;
   --color-surface: #ffffff;
-  --color-card: #f8f5fc;
-  --color-foreground: #1e1b4b;
-  --color-muted: #6b7280;
-  --color-border: rgba(109, 40, 217, 0.15);
+  --color-card: #ffffff;
+  --color-foreground: #1a1435;
+  --color-muted: #5a5675;
+  /* Slightly stronger border so cards have crisp edges in light mode */
+  --color-border: rgba(109, 40, 217, 0.20);
   --color-icon: #5b21b6;
-  --color-tag-bg: rgba(109, 40, 217, 0.1);
-  --color-tag-border: rgba(109, 40, 217, 0.3);
+  --color-tag-bg: rgba(109, 40, 217, 0.10);
+  --color-tag-border: rgba(109, 40, 217, 0.28);
   --color-tag-text: #5b21b6;
   --gradient-hero: radial-gradient(circle at 20% 20%, rgba(139, 92, 246, 0.25), transparent 55%);
 }
@@ -80,7 +82,7 @@
 
 @layer components {
   .card {
-    @apply bg-[var(--color-card)] rounded-3xl border border-[var(--color-border)] shadow-subtle;
+    @apply bg-[var(--color-card)] rounded-3xl border border-[var(--color-border)] shadow-card;
   }
 
   .prose {
@@ -88,10 +90,21 @@
   }
 
   .prose p {
-    @apply leading-normal text-[var(--color-foreground)] mb-4 text-justify;
+    @apply text-[var(--color-foreground)] mb-6 text-justify;
     font-family: "Times New Roman", Times, serif;
     font-size: 1.125rem;
-    line-height: 1.5;
+    line-height: 1.85;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    overflow-wrap: break-word;
+  }
+
+  /* Lead paragraph */
+  .prose > p:first-of-type {
+    font-size: 1.2rem;
+    line-height: 1.9;
+    color: var(--color-foreground);
+    font-style: italic;
   }
 
   /* Aggressive override for headings */
@@ -100,23 +113,36 @@
     border-bottom: none !important;
     font-weight: 600;
     color: var(--color-foreground);
-    margin-top: 2em;
+    margin-top: 2.5em;
     margin-bottom: 0.75em;
   }
+
+  /* Accent line on h2 */
+  .prose h2 {
+    padding-left: 1rem;
+    border-left: 3px solid rgb(var(--brand-primary));
+  }
+
+  /* Slightly smaller accent for h3 */
+  .prose h3 {
+    padding-left: 0.75rem;
+    border-left: 2px solid rgba(var(--brand-secondary), 0.6);
+  }
   
-  /* Anchor link styling */
+  /* Anchor link styling — visible on hover AND keyboard focus */
   .anchor-link {
     text-decoration: none !important;
-    color: var(--color-border);
+    color: rgb(var(--brand-primary) / 0.5);
     margin-left: 0.5em;
     opacity: 0;
     transition: opacity 0.2s;
     font-weight: normal;
   }
-  
+
   h2:hover .anchor-link,
   h3:hover .anchor-link,
-  h4:hover .anchor-link {
+  h4:hover .anchor-link,
+  .anchor-link:focus {
     opacity: 1;
   }
 
@@ -125,12 +151,24 @@
   }
 
   .prose blockquote {
-    @apply relative border-l-0 pl-0 py-6 my-8 text-3xl text-center leading-relaxed text-[var(--color-foreground)] opacity-90;
-    font-family: "Brush Script MT", "cursive";
+    @apply relative my-10 mx-auto py-6 px-8 text-2xl text-center leading-relaxed text-[var(--color-foreground)];
+    max-width: 60ch;
+    border-top: 1px solid rgba(var(--brand-primary), 0.3);
+    border-bottom: 1px solid rgba(var(--brand-primary), 0.3);
+    font-family: "Playfair Display", Georgia, serif;
+    font-style: italic;
+    opacity: 0.92;
   }
 
   .prose blockquote::before {
-    content: none;
+    content: "\201C";
+    display: block;
+    font-size: 4rem;
+    line-height: 0.8;
+    color: rgba(var(--brand-primary), 0.4);
+    font-family: Georgia, serif;
+    text-align: center;
+    margin-bottom: 0.25rem;
   }
 
   .font-calligraphy {

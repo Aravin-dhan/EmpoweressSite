@@ -12,7 +12,7 @@ export function QuickBrowseBar() {
   if (items.length === 0) return null;
 
   return (
-    <nav className="mt-2 border-b border-[var(--color-border)] bg-[var(--color-surface)] px-4 pb-4 pt-5 shadow-sm sm:px-6 lg:px-8 lg:hidden">
+    <nav className="mt-2 border-b border-[var(--color-border)] bg-[var(--color-background)] px-4 pb-4 pt-5 sm:px-6 lg:px-8 lg:hidden">
       <div className="mx-auto flex w-full max-w-7xl gap-3 overflow-x-auto">
         {items.map((item) => {
           const active =

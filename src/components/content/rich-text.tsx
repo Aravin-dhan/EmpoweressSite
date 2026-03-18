@@ -40,7 +40,7 @@ const markdownComponents: ExtendedComponents = {
   h2: ({ children, ...props }) => (
     <h2
       {...props}
-      className="mt-8 mb-4 scroll-mt-24 font-serif text-3xl font-semibold text-[var(--color-foreground)] !no-underline border-none"
+      className="mt-10 mb-4 scroll-mt-24 font-serif text-3xl font-semibold text-[var(--color-foreground)] !no-underline"
       style={{ textDecoration: 'none', borderBottom: 'none' }}
     >
       {children}
@@ -49,16 +49,11 @@ const markdownComponents: ExtendedComponents = {
   h3: ({ children, ...props }) => (
     <h3
       {...props}
-      className="mt-6 mb-3 scroll-mt-28 font-serif text-2xl font-semibold text-[var(--color-foreground)] !no-underline border-none"
+      className="mt-8 mb-3 scroll-mt-28 font-serif text-2xl font-semibold text-[var(--color-foreground)] !no-underline"
       style={{ textDecoration: 'none', borderBottom: 'none' }}
     >
       {children}
     </h3>
-  ),
-  blockquote: ({ children }) => (
-    <blockquote className="my-8 py-4 text-3xl text-center leading-relaxed text-[var(--color-foreground)] opacity-90 font-calligraphy">
-      {children}
-    </blockquote>
   ),
   ul: ({ children, ...props }) => (
     <ul
@@ -169,7 +164,7 @@ const footnotesPlugin: Pluggable = [
 
 export function RichText({ content }: RichTextProps) {
   return (
-    <div className="prose prose-lg prose-slate max-w-[72ch] mx-auto dark:prose-invert">
+    <div className="prose prose-lg prose-slate max-w-[78ch] dark:prose-invert">
       <ReactMarkdown
         remarkPlugins={[remarkGfm, footnotesPlugin]}
         rehypePlugins={[
