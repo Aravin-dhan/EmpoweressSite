@@ -16,6 +16,7 @@ import { CategoryTag } from "@/components/blog/category-tag";
 import { RecentPostsWidget } from "@/components/blog/recent-posts-widget";
 import { siteConfig } from "@/config/site";
 import { ArticleJsonLd } from "@/components/seo/article-json-ld";
+import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-json-ld";
 import { PrintDownload } from "@/components/blog/print-download";
 import { Comments } from "@/components/blog/comments";
 import { formatDate } from "@/lib/utils";
@@ -43,6 +44,13 @@ export default async function BlogPostPage({ params }: PageProps) {
   return (
     <div className="space-y-8 max-w-[1600px] mx-auto px-4 sm:px-6 mt-6">
       <ArticleJsonLd post={post} />
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", item: "/" },
+          { name: "Blog", item: "/blog" },
+          { name: post.title, item: `/blog/${post.slug}` },
+        ]}
+      />
       <ReadingProgress />
       
       <Breadcrumbs

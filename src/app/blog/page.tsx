@@ -2,6 +2,7 @@ import { buildPageMetadata } from "@/lib/metadata";
 import { getAllPosts } from "@/lib/mdx";
 import { PostCard } from "@/components/blog/post-card";
 import { PaginationControls } from "@/components/blog/pagination-controls";
+import { BlogJsonLd } from "@/components/seo/blog-json-ld";
 
 export const metadata = buildPageMetadata({
   title: "Empoweress Blog",
@@ -29,6 +30,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 
   return (
     <div className="space-y-10">
+      <BlogJsonLd posts={paginated} />
       <section className="pb-2 pt-4">
         <h1 className="font-serif text-4xl text-[var(--color-foreground)]">Blogs</h1>
       </section>

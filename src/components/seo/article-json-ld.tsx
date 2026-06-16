@@ -13,6 +13,7 @@ export function ArticleJsonLd({ post }: ArticleJsonLdProps) {
     headline: post.title,
     description: post.excerpt,
     image: post.featuredImage,
+    isAccessibleForFree: true,
     author: {
       "@type": "Person",
       name: post.author.name,
@@ -27,7 +28,10 @@ export function ArticleJsonLd({ post }: ArticleJsonLdProps) {
         url: `${siteConfig.url}/logo.svg`,
       },
     },
-    mainEntityOfPage: `${siteConfig.url}/blog/${post.slug}`,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${siteConfig.url}/blog/${post.slug}`
+    },
     datePublished: post.date,
     dateModified: post.lastUpdated ?? post.date,
     keywords: post.tags.join(", "),
