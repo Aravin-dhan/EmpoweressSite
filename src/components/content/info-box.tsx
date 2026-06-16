@@ -25,7 +25,7 @@ export function InfoBox({
   return (
     <div
       className={cn(
-        "my-6 rounded-2xl border px-6 py-4 text-sm leading-relaxed shadow-subtle",
+        "my-6 rounded-md border px-6 py-4 text-sm leading-relaxed shadow-subtle",
         variantClasses[variant],
       )}
     >

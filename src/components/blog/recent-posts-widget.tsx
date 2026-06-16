@@ -10,7 +10,7 @@ export function RecentPostsWidget({ posts }: RecentPostsWidgetProps) {
   if (!posts.length) return null;
 
   return (
-    <div className="rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-subtle">
+    <div className="rounded-md border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-subtle">
       <p className="text-xs uppercase tracking-[0.4em] text-brand-secondary">
         Recent Posts
       </p>

@@ -49,7 +49,7 @@ export function NewsletterSignup({ className }: { className?: string }) {
   return (
     <section
       className={cn(
-        "rounded-3xl border border-brand-primary/30 bg-gradient-to-br from-brand-primary/10 via-surface-base to-brand-secondary/10 p-8 shadow-glow",
+        "rounded-md border border-brand-primary/30 bg-gradient-to-br from-brand-primary/10 via-surface-base to-brand-secondary/10 p-8 shadow-glow",
         className,
       )}
     >

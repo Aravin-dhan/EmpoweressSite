@@ -8,9 +8,9 @@ type AuthorBioProps = {
 
 export function AuthorBio({ author }: AuthorBioProps) {
   return (
-    <div className="rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-subtle">
+    <div className="rounded-md border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-subtle">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-        <div className="relative h-20 w-20 overflow-hidden rounded-full bg-brand-primary/10">
+        <div className="relative h-20 w-20 overflow-hidden rounded-md bg-brand-primary/10">
             <div className="flex h-full w-full items-center justify-center text-2xl font-semibold text-brand-primary">
               {author.name.charAt(0)}
             </div>
@@ -34,7 +34,7 @@ export function AuthorBio({ author }: AuthorBioProps) {
             <Link
               key={social.url}
               href={social.url}
-              className="rounded-full border border-brand-primary/30 px-4 py-1 text-brand-primary transition hover:bg-brand-primary/10"
+              className="rounded-md border border-brand-primary/30 px-4 py-1 text-brand-primary transition hover:bg-brand-primary/10"
             >
               {social.platform}
             </Link>

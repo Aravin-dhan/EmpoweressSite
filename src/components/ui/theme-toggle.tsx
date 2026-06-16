@@ -14,7 +14,7 @@ export function ThemeToggle() {
   if (!mounted) {
     return (
       <button
-        className="rounded-full border border-[var(--color-border)] p-2"
+        className="rounded-md border border-[var(--color-border)] p-2"
         aria-label="Toggle dark mode"
       >
         <SunIcon className="h-5 w-5" aria-hidden="true" />
@@ -27,7 +27,7 @@ export function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="rounded-full border border-[var(--color-border)] p-2 hover:bg-brand-primary/10"
+      className="rounded-md border border-[var(--color-border)] p-2 hover:bg-brand-primary/10"
       aria-label="Toggle dark mode"
     >
       {isDark ? (

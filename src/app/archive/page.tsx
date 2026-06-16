@@ -16,7 +16,7 @@ export default async function ArchivePage() {
 
   return (
     <div className="space-y-10">
-      <header className="rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-10 shadow-subtle">
+      <header className="rounded-md border border-[var(--color-border)] bg-[var(--color-card)] p-10 shadow-subtle">
         <p className="text-xs uppercase tracking-[0.4em] text-brand-secondary">
           Archive
         </p>
@@ -33,7 +33,7 @@ export default async function ArchivePage() {
         {groups.map((group) => (
           <article
             key={group.key}
-            className="space-y-4 rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-subtle"
+            className="space-y-4 rounded-md border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-subtle"
           >
             <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
               <div>

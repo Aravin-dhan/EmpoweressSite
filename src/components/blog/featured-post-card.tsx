@@ -15,7 +15,7 @@ export function FeaturedPostCard({ post }: FeaturedPostCardProps) {
   const postUrl = `${baseUrl}/blog/${post.slug}`;
 
   return (
-    <article className="grid gap-6 rounded-3xl border border-[var(--color-border)] bg-gradient-to-br from-surface-muted to-surface-base p-4 shadow-card">
+    <article className="grid gap-6 rounded-md border border-[var(--color-border)] bg-gradient-to-br from-surface-muted to-surface-base p-4 shadow-card">
 
       <div className="flex flex-col gap-4">
         <div className="space-y-2.5">
@@ -35,7 +35,7 @@ export function FeaturedPostCard({ post }: FeaturedPostCardProps) {
           <span>{formatDate(post.date)}</span>
           <span>{post.readingTime.text}</span>
           <div className="inline-flex items-center gap-2 text-sm normal-case">
-            <div className="h-9 w-9 overflow-hidden rounded-full bg-brand-primary/10 flex items-center justify-center text-xs font-bold text-brand-primary shrink-0">
+            <div className="h-9 w-9 overflow-hidden rounded-md bg-brand-primary/10 flex items-center justify-center text-xs font-bold text-brand-primary shrink-0">
                 {post.author.name.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase()}
               </div>
             <div>

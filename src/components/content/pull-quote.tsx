@@ -17,7 +17,7 @@ export function PullQuote({
   return (
     <figure
       className={cn(
-        "my-8 rounded-3xl border border-brand-secondary/30 bg-brand-secondary/10 p-6 text-lg italic text-brand-secondary shadow-subtle",
+        "my-8 rounded-md border border-brand-secondary/30 bg-brand-secondary/10 p-6 text-lg italic text-brand-secondary shadow-subtle",
         className,
       )}
     >

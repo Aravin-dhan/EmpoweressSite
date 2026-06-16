@@ -20,7 +20,7 @@ export function SocialLinks({ links, className }: SocialLinksProps) {
           <Link
             key={link.href}
             href={link.href}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-brand-primary/20 text-brand-primary transition hover:bg-brand-primary/10"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-brand-primary/20 text-brand-primary transition hover:bg-brand-primary/10"
             aria-label={link.label}
           >
             {link.label.slice(0, 2)}

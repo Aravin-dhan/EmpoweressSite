@@ -36,14 +36,14 @@ export function PaginationControls({
   const hasNext = page < totalPages;
 
   return (
-    <nav className="flex items-center justify-between rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-4 text-sm shadow-subtle">
+    <nav className="flex items-center justify-between rounded-md border border-[var(--color-border)] bg-[var(--color-card)] p-4 text-sm shadow-subtle">
       <span>
         Page {page} of {totalPages}
       </span>
       <div className="flex items-center gap-3">
         <Link
           aria-disabled={!hasPrev}
-          className={`rounded-full px-4 py-1 ${
+          className={`rounded-md px-4 py-1 ${
             hasPrev
               ? "border border-brand-primary/40 text-brand-primary hover:bg-brand-primary/10"
               : "cursor-not-allowed border border-transparent text-[var(--color-muted)]"
@@ -54,7 +54,7 @@ export function PaginationControls({
         </Link>
         <Link
           aria-disabled={!hasNext}
-          className={`rounded-full px-4 py-1 ${
+          className={`rounded-md px-4 py-1 ${
             hasNext
               ? "border border-brand-primary/40 text-brand-primary hover:bg-brand-primary/10"
               : "cursor-not-allowed border border-transparent text-[var(--color-muted)]"

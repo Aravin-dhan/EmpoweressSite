@@ -9,7 +9,7 @@ export function PrintDownload() {
   };
 
   return (
-    <section className="rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-6 print:hidden">
+    <section className="rounded-md border border-[var(--color-border)] bg-[var(--color-card)] p-6 print:hidden">
       <p className="text-xs uppercase tracking-[0.4em] text-brand-secondary">
         Save
       </p>

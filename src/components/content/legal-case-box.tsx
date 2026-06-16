@@ -16,7 +16,7 @@ export function LegalCaseBox({
   children,
 }: LegalCaseBoxProps) {
   return (
-    <div className="my-6 rounded-2xl border border-brand-primary/30 bg-white/80 p-5 shadow-subtle dark:bg-surface-dark/70">
+    <div className="my-6 rounded-md border border-brand-primary/30 bg-white/80 p-5 shadow-subtle dark:bg-surface-dark/70">
       <p className="text-xs uppercase tracking-[0.4em] text-brand-primary">
         Legal Case
       </p>

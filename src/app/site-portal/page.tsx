@@ -40,7 +40,7 @@ export default async function AdminDashboard() {
                                     <div className="text-xs text-[var(--color-muted)] mt-1">{post.slug}</div>
                                 </td>
                                 <td className="px-6 py-4">
-                                    <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${post.status === 'published' ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300' :
+                                    <span className={`inline-flex items-center rounded-md px-2.5 py-0.5 text-xs font-medium ${post.status === 'published' ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300' :
                                         post.status === 'draft' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300' :
                                             'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300'
                                         }`}>

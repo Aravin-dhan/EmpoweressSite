@@ -20,7 +20,7 @@ export function PostCard({
   const postUrl = `${baseUrl}/blog/${post.slug}`;
 
   return (
-    <article className="group flex h-full flex-col rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-card transition hover:-translate-y-1 hover:shadow-glow">
+    <article className="group flex h-full flex-col rounded-md border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-card transition hover:-translate-y-1 hover:shadow-glow">
 
 
       <div className="mt-6 flex flex-1 flex-col gap-4">
@@ -44,7 +44,7 @@ export function PostCard({
             {post.tags.slice(0, 3).map((tag) => (
               <span
                 key={tag}
-                className="rounded-full bg-brand-secondary/10 px-3 py-1 text-xs font-medium text-brand-secondary"
+                className="rounded-md bg-brand-secondary/10 px-3 py-1 text-xs font-medium text-brand-secondary"
               >
                 {tag}
               </span>

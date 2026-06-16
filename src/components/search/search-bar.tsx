@@ -84,7 +84,7 @@ export function SearchBar({
       {query && (
         <div
           className={cn(
-            "absolute inset-x-0 top-[calc(100%+0.5rem)] z-20 rounded-2xl border p-4 shadow-glow",
+            "absolute inset-x-0 top-[calc(100%+0.5rem)] z-20 rounded-md border p-4 shadow-glow",
             variant === "inverted"
               ? "border-white/30 bg-[#0b0419e6] text-white"
               : "border-[var(--color-border)] bg-[var(--color-card)]",

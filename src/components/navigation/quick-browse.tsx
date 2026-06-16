@@ -22,7 +22,7 @@ export function QuickBrowseBar() {
               key={item.href}
               href={item.href}
               className={cn(
-                "whitespace-nowrap rounded-full border px-4 py-1 text-xs font-semibold uppercase tracking-wide transition",
+                "whitespace-nowrap rounded-md border px-4 py-1 text-xs font-semibold uppercase tracking-wide transition",
                 active
                   ? "border-brand-primary bg-brand-primary/10 text-brand-primary"
                   : "border-[var(--color-border)] text-[var(--color-muted)] hover:border-brand-primary hover:text-brand-primary",

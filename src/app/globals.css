@@ -3,41 +3,39 @@
 @tailwind utilities;
 
 :root {
-  --brand-primary: 109 40 217;
-  --brand-secondary: 157 29 78;
+  --brand-primary: 220 38 38;
+  --brand-secondary: 153 27 27;
   --brand-accent: 251 191 36;
-  --brand-plum: 139 92 246;
-  /* Page bg: clearly lavender so pure-white cards stand out */
-  --color-background: #ede8f5;
+  --brand-plum: 239 68 68;
+  --color-background: #fcf8f8;
   --color-surface: #ffffff;
   --color-card: #ffffff;
-  --color-foreground: #1a1435;
-  --color-muted: #5a5675;
-  /* Slightly stronger border so cards have crisp edges in light mode */
-  --color-border: rgba(109, 40, 217, 0.20);
-  --color-icon: #5b21b6;
-  --color-tag-bg: rgba(109, 40, 217, 0.10);
-  --color-tag-border: rgba(109, 40, 217, 0.28);
-  --color-tag-text: #5b21b6;
-  --gradient-hero: radial-gradient(circle at 20% 20%, rgba(139, 92, 246, 0.25), transparent 55%);
+  --color-foreground: #2d1111;
+  --color-muted: #735454;
+  --color-border: rgba(220, 38, 38, 0.20);
+  --color-icon: #b91c1c;
+  --color-tag-bg: rgba(220, 38, 38, 0.10);
+  --color-tag-border: rgba(220, 38, 38, 0.28);
+  --color-tag-text: #b91c1c;
+  --gradient-hero: radial-gradient(circle at 20% 20%, rgba(239, 68, 68, 0.25), transparent 55%);
 }
 
 .dark {
-  --brand-primary: 167 139 250;
-  --brand-secondary: 244 114 182;
+  --brand-primary: 248 113 113;
+  --brand-secondary: 252 165 165;
   --brand-accent: 255 216 111;
-  --brand-plum: 196 181 253;
-  --color-background: #0f0720;
-  --color-surface: #17102e;
-  --color-card: #1e1538;
-  --color-foreground: #f3f4f6;
-  --color-muted: #9ca3af;
-  --color-border: rgba(167, 139, 250, 0.15);
-  --color-icon: #e9d5ff;
-  --color-tag-bg: rgba(167, 139, 250, 0.15);
-  --color-tag-border: rgba(167, 139, 250, 0.4);
-  --color-tag-text: #e9d5ff;
-  --gradient-hero: radial-gradient(circle at 20% 20%, rgba(167, 139, 250, 0.15), transparent 55%);
+  --brand-plum: 252 165 165;
+  --color-background: #140505;
+  --color-surface: #1f0a0a;
+  --color-card: #290d0d;
+  --color-foreground: #fef2f2;
+  --color-muted: #fca5a5;
+  --color-border: rgba(248, 113, 113, 0.15);
+  --color-icon: #fecaca;
+  --color-tag-bg: rgba(248, 113, 113, 0.15);
+  --color-tag-border: rgba(248, 113, 113, 0.4);
+  --color-tag-text: #fecaca;
+  --gradient-hero: radial-gradient(circle at 20% 20%, rgba(248, 113, 113, 0.15), transparent 55%);
 }
 
 @layer base {
@@ -82,7 +80,7 @@
 
 @layer components {
   .card {
-    @apply bg-[var(--color-card)] rounded-3xl border border-[var(--color-border)] shadow-card;
+    @apply bg-[var(--color-card)] rounded-md border border-[var(--color-border)] shadow-card;
   }
 
   .prose {
@@ -185,7 +183,7 @@
   }
 
   .prose img {
-    @apply my-8 rounded-2xl;
+    @apply my-8 rounded-md;
   }
 
   .prose code {
@@ -193,7 +191,7 @@
   }
 
   pre {
-    @apply rounded-3xl border border-[var(--color-border)] bg-slate-950 text-slate-50;
+    @apply rounded-md border border-[var(--color-border)] bg-slate-950 text-slate-50;
   }
 
   pre code {

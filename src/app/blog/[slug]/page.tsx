@@ -81,7 +81,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             </p>
             {/* Author strip */}
             <div className="flex items-center gap-3 pt-2 border-t border-[var(--color-border)]">
-              <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full bg-brand-primary/10">
+              <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-md bg-brand-primary/10">
                   <div className="flex h-full w-full items-center justify-center text-sm font-semibold text-brand-primary">
                     {post.author.name.charAt(0)}
                   </div>

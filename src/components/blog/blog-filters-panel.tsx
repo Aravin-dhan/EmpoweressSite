@@ -41,7 +41,7 @@ export function BlogFiltersPanel({
         type="button"
         onClick={() => setOpen((prev) => !prev)}
         className={cn(
-          "flex w-full items-center justify-between rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3 text-sm font-semibold text-[var(--color-foreground)] transition hover:border-brand-primary",
+          "flex w-full items-center justify-between rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3 text-sm font-semibold text-[var(--color-foreground)] transition hover:border-brand-primary",
           open && "border-brand-primary bg-brand-primary/5 text-brand-primary",
         )}
       >

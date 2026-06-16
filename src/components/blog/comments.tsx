@@ -10,7 +10,7 @@ export function Comments() {
   }
 
   return (
-    <section className="rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-subtle">
+    <section className="rounded-md border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-subtle">
       <p className="text-xs uppercase tracking-[0.4em] text-brand-secondary">
         Community Dialogue
       </p>

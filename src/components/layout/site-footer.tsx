@@ -70,7 +70,7 @@ export function SiteFooter() {
               <Link
                 key={key}
                 href={href}
-                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-brand-primary/30 text-brand-primary transition hover:bg-brand-primary/10"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-brand-primary/30 text-brand-primary transition hover:bg-brand-primary/10"
                 aria-label={key}
               >
                 <SocialIcon

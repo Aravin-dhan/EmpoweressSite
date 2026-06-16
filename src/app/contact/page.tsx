@@ -36,7 +36,7 @@ const submissionFormUrl = "https://forms.gle/empoweressSubmissions";
 export default function ContactPage() {
   return (
     <div className="space-y-12">
-      <header className="rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-10 shadow-subtle">
+      <header className="rounded-md border border-[var(--color-border)] bg-[var(--color-card)] p-10 shadow-subtle">
         <p className="text-xs uppercase tracking-[0.4em] text-brand-secondary">
           Contact
         </p>
@@ -46,7 +46,7 @@ export default function ContactPage() {
         </p>
       </header>
 
-      <section className="rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-8 shadow-subtle">
+      <section className="rounded-md border border-[var(--color-border)] bg-[var(--color-card)] p-8 shadow-subtle">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
           <div className="space-y-3">
             <p className="text-xs uppercase tracking-[0.4em] text-brand-secondary">
@@ -61,7 +61,7 @@ export default function ContactPage() {
             href={submissionFormUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center rounded-full border border-brand-primary/40 px-6 py-2 text-sm font-semibold text-brand-primary hover:bg-brand-primary/10"
+            className="inline-flex items-center justify-center rounded-md border border-brand-primary/40 px-6 py-2 text-sm font-semibold text-brand-primary hover:bg-brand-primary/10"
           >
             Submit via Google Form →
           </a>
@@ -70,7 +70,7 @@ export default function ContactPage() {
           {submissionGuidelines.map((guideline) => (
             <li
               key={guideline}
-              className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4"
+              className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] p-4"
             >
               {guideline}
             </li>
@@ -79,11 +79,11 @@ export default function ContactPage() {
       </section>
 
       <div className="grid gap-10 lg:grid-cols-[2fr,1fr]">
-        <div className="rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-8 shadow-subtle">
+        <div className="rounded-md border border-[var(--color-border)] bg-[var(--color-card)] p-8 shadow-subtle">
           <ContactForm />
         </div>
         <aside className="space-y-6">
-          <div className="rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-subtle">
+          <div className="rounded-md border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-subtle">
             <p className="text-xs uppercase tracking-[0.4em] text-brand-secondary">
               Direct Channels
             </p>

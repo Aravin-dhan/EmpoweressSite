@@ -14,7 +14,7 @@ export function TrendingList({ posts }: TrendingListProps) {
       {posts.map((post, index) => (
         <li
           key={post.slug}
-          className="flex gap-4 rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-5 shadow-subtle"
+          className="flex gap-4 rounded-md border border-[var(--color-border)] bg-[var(--color-card)] p-5 shadow-subtle"
         >
           <span className="text-3xl font-semibold text-brand-primary lg:text-4xl">
             {String(index + 1).padStart(2, "0")}

@@ -12,7 +12,7 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-3 z-30 px-4 sm:px-6 lg:px-8 print:hidden">
-      <div className="mx-auto flex w-full max-w-7xl items-center justify-between rounded-full border border-[var(--color-border)] bg-[var(--color-card)]/80 px-6 py-4 shadow-subtle backdrop-blur-xl">
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between rounded-md border border-[var(--color-border)] bg-[var(--color-card)]/80 px-6 py-4 shadow-subtle backdrop-blur-xl">
         <Link href="/" className="inline-flex items-center gap-3">
           <span className="font-serif text-2xl font-semibold text-brand-primary">
             Empoweress
@@ -40,7 +40,7 @@ export function SiteHeader() {
           <ThemeToggle />
           <Link
             href="/contact"
-            className="hidden rounded-full border border-brand-primary/30 px-4 py-2 text-sm font-semibold text-brand-primary transition hover:bg-brand-primary/10 md:inline-flex"
+            className="hidden rounded-md border border-brand-primary/30 px-4 py-2 text-sm font-semibold text-brand-primary transition hover:bg-brand-primary/10 md:inline-flex"
           >
             Collaborate
           </Link>

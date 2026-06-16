@@ -27,7 +27,7 @@ export function CookieBanner() {
   if (!visible) return null;
 
   return (
-    <div className="fixed inset-x-4 bottom-4 z-40 rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-4 shadow-glow sm:inset-x-auto sm:left-1/2 sm:w-full sm:max-w-lg sm:-translate-x-1/2">
+    <div className="fixed inset-x-4 bottom-4 z-40 rounded-md border border-[var(--color-border)] bg-[var(--color-card)] p-4 shadow-glow sm:inset-x-auto sm:left-1/2 sm:w-full sm:max-w-lg sm:-translate-x-1/2">
       <p className="text-sm text-[var(--color-foreground)]">
         We use essential cookies and privacy-friendly analytics to improve Empoweress.{" "}
         <Link href="/privacy" className="font-semibold text-brand-primary underline">

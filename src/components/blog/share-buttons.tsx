@@ -37,7 +37,7 @@ export function ShareButtons({ url, title, className }: ShareButtonsProps) {
   return (
     <div
       className={cn(
-        "rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-6",
+        "rounded-md border border-[var(--color-border)] bg-[var(--color-card)] p-6",
         className,
       )}
     >
@@ -51,7 +51,7 @@ export function ShareButtons({ url, title, className }: ShareButtonsProps) {
             href={shareLink(platform.baseUrl)}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full border border-brand-primary/20 px-4 py-2 text-sm font-semibold text-brand-primary hover:bg-brand-primary/10"
+            className="inline-flex items-center gap-2 rounded-md border border-brand-primary/20 px-4 py-2 text-sm font-semibold text-brand-primary hover:bg-brand-primary/10"
           >
             <ArrowUpOnSquareIcon className="h-4 w-4" aria-hidden="true" />
             {platform.name}
@@ -59,7 +59,7 @@ export function ShareButtons({ url, title, className }: ShareButtonsProps) {
         ))}
         <button
           onClick={handleCopy}
-          className="inline-flex items-center gap-2 rounded-full border border-brand-primary/20 px-4 py-2 text-sm font-semibold text-brand-primary hover:bg-brand-primary/10"
+          className="inline-flex items-center gap-2 rounded-md border border-brand-primary/20 px-4 py-2 text-sm font-semibold text-brand-primary hover:bg-brand-primary/10"
         >
           <LinkIcon className="h-4 w-4" aria-hidden="true" />
           {copied ? "Copied!" : "Copy link"}

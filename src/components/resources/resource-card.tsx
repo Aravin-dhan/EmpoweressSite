@@ -23,10 +23,10 @@ export function ResourceCard({
   format = "article",
 }: ResourceCardProps) {
   return (
-    <article className="rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-subtle">
+    <article className="rounded-md border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-subtle">
       <div className="flex items-center gap-3 text-xs uppercase tracking-[0.4em] text-brand-secondary">
         <span>{category}</span>
-        <span className="rounded-full border border-brand-primary/30 px-3 py-1">
+        <span className="rounded-md border border-brand-primary/30 px-3 py-1">
           {formatMap[format]}
         </span>
       </div>

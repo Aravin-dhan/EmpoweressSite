@@ -14,7 +14,7 @@ export default async function ResourcesPage() {
 
   return (
     <div className="space-y-12">
-      <header className="rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-10 shadow-subtle">
+      <header className="rounded-md border border-[var(--color-border)] bg-[var(--color-card)] p-10 shadow-subtle">
         <p className="text-xs uppercase tracking-[0.4em] text-brand-secondary">
           Resources
         </p>
@@ -42,7 +42,7 @@ export default async function ResourcesPage() {
         ))}
       </section>
 
-      <section className="rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-8 shadow-subtle">
+      <section className="rounded-md border border-[var(--color-border)] bg-[var(--color-card)] p-8 shadow-subtle">
         <p className="text-xs uppercase tracking-[0.4em] text-brand-secondary">
           Archive by Month
         </p>
@@ -50,7 +50,7 @@ export default async function ResourcesPage() {
           {archives
             .filter((group) => group.posts.length > 0)
             .map((group) => (
-              <div key={group.key} className="space-y-2 rounded-2xl border border-[var(--color-border)] p-4">
+              <div key={group.key} className="space-y-2 rounded-md border border-[var(--color-border)] p-4">
                 <p className="text-sm font-semibold text-[var(--color-foreground)]">{group.label}</p>
                 <ul className="space-y-1 text-sm text-[var(--color-muted)]">
                   {group.posts.map((post) => (

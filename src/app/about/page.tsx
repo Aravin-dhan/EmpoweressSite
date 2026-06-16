@@ -14,7 +14,7 @@ export const metadata = buildPageMetadata({
 export default function AboutPage() {
   return (
     <div className="space-y-12">
-      <header className="rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-10 shadow-subtle">
+      <header className="rounded-md border border-[var(--color-border)] bg-[var(--color-card)] p-10 shadow-subtle">
         <p className="text-xs uppercase tracking-[0.4em] text-brand-secondary">About</p>
         <h1 className="mt-3 font-serif text-4xl">Who we are.</h1>
         <p className="mt-2 text-lg text-[var(--color-muted)]">
@@ -23,7 +23,7 @@ export default function AboutPage() {
         </p>
       </header>
 
-      <section className="rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-8 shadow-subtle">
+      <section className="rounded-md border border-[var(--color-border)] bg-[var(--color-card)] p-8 shadow-subtle">
         <p className="text-xs uppercase tracking-[0.4em] text-brand-secondary">
           Editorial Team
         </p>
@@ -31,7 +31,7 @@ export default function AboutPage() {
           {editorialTeam.map((member) => (
             <article
               key={member.name}
-              className="space-y-3 rounded-3xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4"
+              className="space-y-3 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] p-4"
             >
 
               <div className="space-y-1">
@@ -46,7 +46,7 @@ export default function AboutPage() {
                   <Link
                     key={social.href}
                     href={social.href}
-                    className="rounded-full border border-brand-primary/40 px-3 py-1 text-brand-primary hover:bg-brand-primary/10"
+                    className="rounded-md border border-brand-primary/40 px-3 py-1 text-brand-primary hover:bg-brand-primary/10"
                   >
                     {social.label}
                   </Link>

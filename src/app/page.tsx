@@ -19,14 +19,14 @@ export default async function HomePage() {
 
   return (
     <div className="space-y-12">
-      <section className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-[#4c1d95] via-[#2d0a4b] to-[#0b0419] p-10 text-white shadow-glow">
+      <section className="relative overflow-hidden rounded-md border border-white/10 bg-gradient-to-br from-[#7f1d1d] via-[#450a0a] to-[#2e0202] p-10 text-white shadow-glow">
         {/* radial glow top-left */}
-        <div className="pointer-events-none absolute -top-24 -left-24 h-96 w-96 rounded-full bg-violet-600/20 blur-3xl" />
+        <div className="pointer-events-none absolute -top-24 -left-24 h-96 w-96 rounded-md bg-red-600/20 blur-3xl" />
         {/* subtle sweep bottom-right */}
-        <div className="pointer-events-none absolute -bottom-16 -right-16 h-72 w-72 rounded-full bg-[#9d1d4e]/20 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-16 -right-16 h-72 w-72 rounded-md bg-orange-600/20 blur-3xl" />
         <div className="relative space-y-6">
           <div className="max-w-3xl space-y-5">
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/40 px-4 py-1 text-xs uppercase tracking-[0.4em] text-white">
+            <span className="inline-flex items-center gap-2 rounded-md border border-white/40 px-4 py-1 text-xs uppercase tracking-[0.4em] text-white">
               Empoweress
             </span>
             <h1 className="text-4xl leading-tight text-white sm:text-5xl lg:text-6xl">
@@ -76,7 +76,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-brand-primary/20 bg-gradient-to-br from-brand-primary/5 via-transparent to-brand-secondary/10 p-8 shadow-subtle">
+      <section className="rounded-md border border-brand-primary/20 bg-gradient-to-br from-brand-primary/5 via-transparent to-brand-secondary/10 p-8 shadow-subtle">
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <div>
             <p className="text-xs uppercase tracking-[0.4em] text-brand-secondary">
@@ -111,7 +111,7 @@ export default async function HomePage() {
 
       <div className="grid gap-6 lg:grid-cols-[2fr,1fr]">
         <NewsletterSignup />
-        <div className="rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-subtle">
+        <div className="rounded-md border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-subtle">
           <p className="text-xs uppercase tracking-[0.3em] text-brand-secondary">
             Categories
           </p>

@@ -37,7 +37,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 
       <section className="space-y-4">
         {paginated.length === 0 ? (
-          <div className="rounded-3xl border border-dashed border-brand-primary/40 p-8 text-center">
+          <div className="rounded-md border border-dashed border-brand-primary/40 p-8 text-center">
             <p className="font-semibold text-[var(--color-foreground)]">No essays yet.</p>
             <p className="text-sm text-[var(--color-muted)]">Check back soon.</p>
           </div>

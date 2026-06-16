@@ -33,7 +33,7 @@ export function ShareInlineButton({ title, url, className }: ShareInlineButtonPr
       type="button"
       onClick={handleShare}
       className={cn(
-        "inline-flex items-center gap-2 rounded-full border border-brand-primary/30 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-brand-primary transition hover:bg-brand-primary/10",
+        "inline-flex items-center gap-2 rounded-md border border-brand-primary/30 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-brand-primary transition hover:bg-brand-primary/10",
         className,
       )}
       aria-label={`Share ${title}`}

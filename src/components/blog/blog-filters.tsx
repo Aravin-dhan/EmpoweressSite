@@ -66,7 +66,7 @@ export function BlogFilters({ categories, tags, initial }: BlogFiltersProps) {
   };
 
   return (
-    <section className="space-y-4 rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-subtle">
+    <section className="space-y-4 rounded-md border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-subtle">
       <form onSubmit={handleSubmit} className="flex flex-col gap-3 md:flex-row">
         <Input
           placeholder="Search titles, excerpts, or tags"
@@ -86,7 +86,7 @@ export function BlogFilters({ categories, tags, initial }: BlogFiltersProps) {
         <label className="flex flex-col text-xs uppercase tracking-[0.3em] text-brand-secondary">
           Category
           <select
-            className="mt-2 rounded-2xl border border-[var(--color-border)] bg-transparent px-3 py-2 text-sm text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-secondary"
+            className="mt-2 rounded-md border border-[var(--color-border)] bg-transparent px-3 py-2 text-sm text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-secondary"
             value={initial.category ?? ""}
             onChange={(event) => updateParam("category", event.target.value || undefined)}
           >
@@ -102,7 +102,7 @@ export function BlogFilters({ categories, tags, initial }: BlogFiltersProps) {
         <label className="flex flex-col text-xs uppercase tracking-[0.3em] text-brand-secondary">
           Tag
           <select
-            className="mt-2 rounded-2xl border border-[var(--color-border)] bg-transparent px-3 py-2 text-sm text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-secondary"
+            className="mt-2 rounded-md border border-[var(--color-border)] bg-transparent px-3 py-2 text-sm text-[var(--color-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-secondary"
             value={initial.tag ?? ""}
             onChange={(event) => updateParam("tag", event.target.value || undefined)}
           >
@@ -146,7 +146,7 @@ export function BlogFilters({ categories, tags, initial }: BlogFiltersProps) {
               key={option.value}
               type="button"
               onClick={() => updateParam("sort", option.value)}
-              className={`rounded-full border px-4 py-1 text-sm ${
+              className={`rounded-md border px-4 py-1 text-sm ${
                 (initial.sort ?? "newest") === option.value
                   ? "border-brand-primary bg-brand-primary/10 text-brand-primary"
                   : "border-brand-primary/30 text-[var(--color-muted)] hover:border-brand-primary/60"
