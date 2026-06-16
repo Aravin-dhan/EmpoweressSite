@@ -21,17 +21,7 @@ export function PostCard({
 
   return (
     <article className="group flex h-full flex-col rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-6 shadow-card transition hover:-translate-y-1 hover:shadow-glow">
-      <div
-        className={`relative overflow-hidden rounded-2xl ${isVertical ? "pb-48" : "pb-56"}`}
-      >
-        <Image
-          src={post.featuredImage}
-          alt={post.title}
-          fill
-          className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-          sizes="(max-width: 768px) 100vw, 33vw"
-        />
-      </div>
+
 
       <div className="mt-6 flex flex-1 flex-col gap-4">
         <div className="flex flex-wrap items-center justify-between gap-3">

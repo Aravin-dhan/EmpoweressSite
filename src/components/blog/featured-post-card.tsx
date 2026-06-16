@@ -15,16 +15,7 @@ export function FeaturedPostCard({ post }: FeaturedPostCardProps) {
   const postUrl = `${baseUrl}/blog/${post.slug}`;
 
   return (
-    <article className="grid gap-6 rounded-3xl border border-[var(--color-border)] bg-gradient-to-br from-surface-muted to-surface-base p-4 shadow-card md:grid-cols-[minmax(240px,320px)_1fr]">
-      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl md:aspect-[5/4] lg:h-full">
-        <Image
-          src={post.featuredImage}
-          alt={post.title}
-          fill
-          className="h-full w-full object-cover transition duration-700 hover:scale-105"
-          sizes="(max-width: 1024px) 100vw, 50vw"
-        />
-      </div>
+    <article className="grid gap-6 rounded-3xl border border-[var(--color-border)] bg-gradient-to-br from-surface-muted to-surface-base p-4 shadow-card">
 
       <div className="flex flex-col gap-4">
         <div className="space-y-2.5">

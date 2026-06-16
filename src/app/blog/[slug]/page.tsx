@@ -82,13 +82,9 @@ export default async function BlogPostPage({ params }: PageProps) {
             {/* Author strip */}
             <div className="flex items-center gap-3 pt-2 border-t border-[var(--color-border)]">
               <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full bg-brand-primary/10">
-                {post.author.avatar ? (
-                  <Image src={post.author.avatar} alt={post.author.name} fill className="object-cover" />
-                ) : (
                   <div className="flex h-full w-full items-center justify-center text-sm font-semibold text-brand-primary">
                     {post.author.name.charAt(0)}
                   </div>
-                )}
               </div>
               <div>
                 <p className="text-sm font-semibold text-[var(--color-foreground)]">{post.author.name}</p>
@@ -98,18 +94,6 @@ export default async function BlogPostPage({ params }: PageProps) {
               </div>
             </div>
           </div>
-        </div>
-
-        {/* Featured image */}
-        <div className="relative w-full overflow-hidden rounded-2xl" style={{ aspectRatio: "16/7" }}>
-          <Image
-            src={post.featuredImage}
-            alt={post.title}
-            fill
-            priority
-            className="object-cover"
-            sizes="(max-width: 1280px) 100vw, 1280px"
-          />
         </div>
       </header>
 

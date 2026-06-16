@@ -33,15 +33,7 @@ export default function AboutPage() {
               key={member.name}
               className="space-y-3 rounded-3xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4"
             >
-              <div className="relative h-40 w-full overflow-hidden rounded-2xl">
-                <Image
-                  src={member.photo}
-                  alt={member.name}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 300px"
-                  className="object-cover"
-                />
-              </div>
+
               <div className="space-y-1">
                 <h3 className="font-serif text-2xl">{member.name}</h3>
                 <p className="text-sm uppercase tracking-wide text-brand-primary">

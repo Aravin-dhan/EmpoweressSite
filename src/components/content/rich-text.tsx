@@ -94,20 +94,8 @@ const markdownComponents: ExtendedComponents = {
       {children}
     </td>
   ),
-  img: ({ src, alt }) => {
-    const resolvedSrc = typeof src === "string" ? src : undefined;
-    if (!resolvedSrc) return null;
-    return (
-      <div className="my-8 overflow-hidden border border-[var(--color-border)]">
-        <Image
-          src={resolvedSrc}
-          alt={alt ?? ""}
-          width={1200}
-          height={675}
-          className="h-auto w-full object-cover"
-        />
-      </div>
-    );
+  img: () => {
+    return null;
   },
   "info-box": ({ children, ...props }: GenericElementProps) => {
     const attrs = props as Record<string, string | undefined>;
